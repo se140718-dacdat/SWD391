@@ -1,0 +1,13 @@
+:root {
+    --white-color: #fff;
+    --black-color: #000;
+    --primary-color: #F27229;
+    --primary-button: #606099;
+    --primary-bar: #f4f3f2;
+}
+
+#App .btn-primary-color {
+    background-color: var(--primary-button) !important;
+    padding: 6px 20px;
+    border: none;
+}

@@ -1,0 +1,33 @@
+.vin-icon {
+    width: 90px;
+    padding-right: 24px;
+}
+
+#Header .navbar-collapse {
+    font-weight: bold;
+    font-size: 18px
+}
+
+#Header .search {
+    width: 400px;
+    height: 40px;
+    background-color: var(--primary-bar);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    padding: 8px;
+}
+
+#Header .search-bar {
+    height: 40px;
+    margin-left: 8px;
+    border: none;
+    outline: none;
+    background-color: var(--primary-bar);
+    flex: 1;
+}
+
+#Header .search>i {
+    color: #777;
+    font-size: 20px
+}
