@@ -36,7 +36,7 @@ const Header: React.FC = props => {
                             <input type="search" className="search-bar" placeholder='Search...' />
                         </Nav>
                         <Nav>
-                            <Nav.Link href="#deets"><Button className="btn-primary-color" variant="primary" onClick={handleShow}>Login</Button></Nav.Link>
+                            <Nav.Link href="#"><Button className="btn-primary-color" variant="primary" onClick={handleShow}>Login</Button></Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

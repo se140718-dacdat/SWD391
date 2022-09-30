@@ -6,6 +6,10 @@
     --primary-bar: #f4f3f2;
 }
 
+#App {
+    position: relative;
+}
+
 #App .btn-primary-color {
     background-color: var(--primary-button) !important;
     padding: 6px 20px;

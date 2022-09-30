@@ -3,8 +3,9 @@ import "primeicons/primeicons.css";
 import './App.css';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import AdminHeader from './components/modules/pagecomponents/Admin/AdminHeader/AdminHeader';
-import AdminLanding from './components/pages/Admin/LandingPage';
 import Header from './components/modules/pagecomponents/Header/Header';
+import Menu from './components/modules/pagecomponents/Menu/Menu';
+import Main from './components/pages/Admin/Main';
 function App() {
   const [user, setUser] = useState(0);
   return (
@@ -18,9 +19,9 @@ function App() {
               return <AdminHeader />;
           }
         })()}
-
+        <Menu />
         <Routes>
-          <Route path='/admin' element={<AdminLanding />}></Route>
+          <Route path='/' element={<Main />}></Route>
         </Routes>
       </BrowserRouter>
 
