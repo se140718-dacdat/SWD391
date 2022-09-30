@@ -1,37 +1,33 @@
-import React, { Dispatch, SetStateAction } from 'react'
+import React, { Dispatch, SetStateAction, useState } from 'react'
 import "./Menu.css";
 // interface Props {
 //     setUser: Dispatch<SetStateAction<User | null>>;
 // }
 const Menu: React.FC = props => {
+    const [checked, isChecked] = useState();
+
     const menuList = [{
-        name: "car"
+        name: "Lướt xem tất cả"
     },
     {
-        name: "houseware"
+        name: "Xe cộ"
     }, {
-        name: "Car"
+        name: "Bán nhà"
     }, {
-        name: "Car"
+        name: "Đồ gia dụng"
     }, {
-        name: "Car"
+        name: "Đồ may mặc"
     }, {
-        name: "Car"
+        name: "Đồ điện tử"
     }, {
-        name: "Car"
-    }, {
-        name: "Car"
-    }, {
-        name: "Car"
-    }, {
-        name: "Car"
-    },
+        name: "Rao vặt"
+    }
     ];
 
     return (
         <div id="Menu">
             <div className="menu-container">
-                <p className="menu-title">Categories</p>
+                <p className="menu-title">Danh mục</p>
                 <ul className="menu-list">
                     {
                         menuList.map((item, index) => {

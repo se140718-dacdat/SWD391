@@ -18,7 +18,7 @@ const Header: React.FC = props => {
                     <Navbar.Brand href="#home"><img className="vin-icon" src="/images/vin-icon.jpg"></img></Navbar.Brand>
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">
-                            <Nav.Link href="home">Home</Nav.Link>
+                            <Nav.Link href="/">Trang chủ</Nav.Link>
                             {/* <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
                                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                                 <NavDropdown.Item href="#action/3.2">
@@ -33,10 +33,10 @@ const Header: React.FC = props => {
                         </Nav>
                         <Nav className="search">
                             <i className="pi pi-search"></i>
-                            <input type="search" className="search-bar" placeholder='Search...' />
+                            <input type="search" className="search-bar" placeholder='Tìm kiếm...' />
                         </Nav>
                         <Nav>
-                            <Nav.Link href="#"><Button className="btn-primary-color" variant="primary" onClick={handleShow}>Login</Button></Nav.Link>
+                            <Nav.Link href="#"><Button className="btn-primary-color" variant="primary" onClick={handleShow}>Đăng nhập</Button></Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

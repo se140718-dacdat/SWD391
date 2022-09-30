@@ -15,3 +15,8 @@
     padding: 6px 20px;
     border: none;
 }
+
+#App .link {
+    text-decoration: none;
+    color: var(--black-color);
+}

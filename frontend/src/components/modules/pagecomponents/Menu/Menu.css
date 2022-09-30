@@ -5,7 +5,7 @@
     padding: 16px;
     position: fixed;
     box-shadow: 0 3px 13px 0 rgba(32, 40, 49, 0.5);
-    margin-top: 105px;
+    margin-top: 101px;
     border-radius: 5px;
 }
 
@@ -22,8 +22,14 @@
 
 #Menu .menu-item {
     list-style: none;
-    padding: 13px;
     border-radius: 5px;
+    height: 50px;
+}
+
+#Menu .menu-item-link {
+    width: calc(100vh -45px);
+    padding: 13px;
+    display: flex;
 }
 
 #Menu .menu-item-icon {
@@ -40,9 +46,8 @@
     cursor: pointer;
 }
 
-#Menu .menu-item:active,
-#Menu .menu-item:visited {
-    background-color: #595999;
+#Menu .menu-item:active{
+    background-color: #595999 !important;
     color: var(--white-color);
 }
 
