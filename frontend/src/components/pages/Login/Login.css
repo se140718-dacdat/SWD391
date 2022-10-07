@@ -1,0 +1,44 @@
+#Login {
+    z-index: 20;
+    position: absolute;
+    background-image: url("../../../../public/images/background.jpg");
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+}
+
+#Login .login-title {
+    margin-top: 200px;
+    width: 100%;
+    text-align: center;
+    align-items: center;
+    color: var(--white-color);
+    height: 20px;   
+}
+#Login .login-form {
+    align-items: center;    
+}
+#Login input {
+    display: block;
+}   
+
+#Login .login-input,
+#Login .btn-login {
+    margin: 12px 12px;
+    width: 500px;
+    border-radius: 5px;
+    padding: 12px 12px;
+}
+
+#Login .btn-login {
+  background-color: var(--primary-button);
+  color: var(--white-color);
+}
+
+#Login .btn-login:hover {
+    background-color: var(--primary-button-hover);
+}
+

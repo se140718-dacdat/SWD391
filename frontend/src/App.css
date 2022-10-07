@@ -2,8 +2,29 @@
     --white-color: #fff;
     --black-color: #000;
     --primary-color: #F27229;
-    --primary-button: #606099;
+    --primary-button: #595999;
+    --primary-button-hover: #606099;
     --primary-bar: #f4f3f2;
+}
+
+.left-side {
+    z-index: 14;
+    width: 280px;
+    height: 100%;
+    padding: 16px;
+    position: fixed;
+    box-shadow: 0 3px 13px 0 rgba(32, 40, 49, 0.5);
+    margin-top: 101px;
+    border-radius: 5px;
+}
+.right-side {
+    z-index: 1;
+    position: absolute;
+    width: calc(100% - 280px);
+    height: calc(100vh);
+    margin-left: 280px;
+    margin-top: 102px;
+    padding: 32px 80px 0 80px;
 }
 
 #App {
@@ -19,4 +40,9 @@
 #App .link {
     text-decoration: none;
     color: var(--black-color);
+}
+
+.border {
+    border: 1px #ccc;
+    border-radius: 10px;
 }

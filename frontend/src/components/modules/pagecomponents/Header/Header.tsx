@@ -36,12 +36,12 @@ const Header: React.FC = props => {
                             <input type="search" className="search-bar" placeholder='Tìm kiếm...' />
                         </Nav>
                         <Nav>
-                            <Nav.Link href="#"><Button className="btn-primary-color" variant="primary" onClick={handleShow}>Đăng nhập</Button></Nav.Link>
+                            <Nav.Link href="/login"><Button className="btn-primary-color" variant="primary">Đăng nhập</Button></Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
-            <Modal show={show} onHide={handleClose}>
+            {/* <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Login</Modal.Title>
                 </Modal.Header>
@@ -73,7 +73,7 @@ const Header: React.FC = props => {
                         Login
                     </Button>
                 </Modal.Footer>
-            </Modal>
+            </Modal> */}
         </div>
     );
 }

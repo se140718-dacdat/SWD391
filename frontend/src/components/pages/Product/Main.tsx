@@ -3,7 +3,7 @@ import "./Main.css";
 
 const Main: React.FC = props => {
     return (
-        <div id="Main">
+        <div id="Main" className="right-side">
             <div className="nav">
                 <a className="link">Trang chủ</a>&nbsp;/&nbsp;<a className="link">Xem tất cả</a>
             </div>
@@ -18,7 +18,7 @@ const Main: React.FC = props => {
             </div>
             <ul className="products">
                 <li className="item">
-                    <a href="/item" className="item-information">
+                    <a href="/product" className="item-information">
                         <img src="https://demos.buddyboss.com/online-communities/wp-content/sandbox64720-uploads/2019/05/swim-trunk.png" alt="" />
                         <h2 className="item-title">Classic swim trunk</h2>
                         <span className="item-price">$150.0</span>

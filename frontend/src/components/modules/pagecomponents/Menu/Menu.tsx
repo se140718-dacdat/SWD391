@@ -25,7 +25,7 @@ const Menu: React.FC = props => {
     ];
 
     return (
-        <div id="Menu">
+        <div id="Menu" className='left-side'>
             <div className="menu-container">
                 <p className="menu-title">Danh mục</p>
                 <ul className="menu-list">

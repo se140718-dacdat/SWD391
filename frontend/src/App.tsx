@@ -5,23 +5,33 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import AdminHeader from './components/modules/pagecomponents/Admin/AdminHeader/AdminHeader';
 import Header from './components/modules/pagecomponents/Header/Header';
 import Menu from './components/modules/pagecomponents/Menu/Menu';
-import Main from './components/pages/Admin/Main';
+import Main from './components/pages/Product/Main';
+import Login from './components/pages/Login/Login';
+import Product from './components/pages/Product/Product';
 function App() {
-  const [user, setUser] = useState(0);
+  const [user, setUser] = useState(1);
   return (
     <div id="App">
       <BrowserRouter>
         {(() => {
           switch (user) {
             case 0:
-              return <Header />;
+                return <Login />;
             case 1:
+              return (
+              <div>
+                <Header />
+                      <Menu />
+                </div>);
+              
+            case 2:
               return <AdminHeader />;
           }
         })()}
-        <Menu />
         <Routes>
+          <Route path='/login' element={<Login />}></Route>
           <Route path='/' element={<Main />}></Route>
+          <Route path='/product' element={<Product />}></Route>
         </Routes>
       </BrowserRouter>
 
