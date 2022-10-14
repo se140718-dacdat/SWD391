@@ -17,45 +17,49 @@ const Main: React.FC = props => {
                 </Form.Select>
             </div>
             <ul className="products">
-                <li className="item">
-                    <a href="/product" className="item-information">
+                <li className="item clearfix">
+                    <div className="item-img">
                         <img src="https://demos.buddyboss.com/online-communities/wp-content/sandbox64720-uploads/2019/05/swim-trunk.png" alt="" />
+                    </div>
+                    <div className="item-cover">
                         <h2 className="item-title">Classic swim trunk</h2>
                         <span className="item-price">$150.0</span>
-                    </a>
-                    <a className="btn-addtocart">add to cart</a>
+                        <div className="space"></div>
+                        <span className="item-store">Dat LU Store</span>
+                    </div>
                 </li>
-                <li className="item">
-                    <a href="/item" className="item-information">
+                <li className="item clearfix">
+                    <div className="item-img">
                         <img src="https://demos.buddyboss.com/online-communities/wp-content/sandbox64720-uploads/2019/05/swim-trunk.png" alt="" />
+                    </div>
+                    <div className="item-cover">
                         <h2 className="item-title">Classic swim trunk</h2>
                         <span className="item-price">$150.0</span>
-                    </a>
-                    <a className="btn-addtocart">add to cart</a>
+                        <div className="space"></div>
+                        <span className="item-store">Dat LU Store</span>
+                    </div>
                 </li>
-                <li className="item">
-                    <a href="/item" className="item-information">
+                <li className="item clearfix">
+                    <div className="item-img">
                         <img src="https://demos.buddyboss.com/online-communities/wp-content/sandbox64720-uploads/2019/05/swim-trunk.png" alt="" />
+                    </div>
+                    <div className="item-cover">
                         <h2 className="item-title">Classic swim trunk</h2>
                         <span className="item-price">$150.0</span>
-                    </a>
-                    <a className="btn-addtocart">add to cart</a>
+                        <div className="space"></div>
+                        <span className="item-store">Dat LU Store</span>
+                    </div>
                 </li>
-                <li className="item">
-                    <a href="/item" className="item-information">
+                <li className="item clearfix">
+                    <div className="item-img">
                         <img src="https://demos.buddyboss.com/online-communities/wp-content/sandbox64720-uploads/2019/05/swim-trunk.png" alt="" />
+                    </div>
+                    <div className="item-cover">
                         <h2 className="item-title">Classic swim trunk</h2>
                         <span className="item-price">$150.0</span>
-                    </a>
-                    <a className="btn-addtocart">add to cart</a>
-                </li>
-                <li className="item">
-                    <a href="/item" className="item-information">
-                        <img src="https://demos.buddyboss.com/online-communities/wp-content/sandbox64720-uploads/2019/05/swim-trunk.png" alt="" />
-                        <h2 className="item-title">Classic swim trunk</h2>
-                        <span className="item-price">$150.0</span>
-                    </a>
-                    <a className="btn-addtocart">add to cart</a>
+                        <div className="space"></div>
+                        <span className="item-store">Dat LU Store</span>
+                    </div>
                 </li>
             </ul>
         </div>
