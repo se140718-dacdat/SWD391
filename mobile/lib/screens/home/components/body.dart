@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/constants.dart';
 import 'package:mobile/models/Product.dart';
+import 'package:mobile/screens/details/details_screen.dart';
 import 'package:mobile/screens/home/components/categories.dart';
 import 'package:mobile/screens/home/components/item_card.dart';
 
@@ -37,7 +38,8 @@ class Body extends StatelessWidget {
                 ],
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddin),
+                padding:
+                    const EdgeInsets.symmetric(vertical: kDefaultPaddin / 2),
                 child: Text(
                   "Khám Phá Danh Mục",
                   style: Theme.of(context)
@@ -61,8 +63,15 @@ class Body extends StatelessWidget {
                 mainAxisSpacing: kDefaultPaddin,
                 crossAxisSpacing: kDefaultPaddin,
               ),
-              itemBuilder: (context, index) =>
-                  ItemCard(product: products[index]),
+              itemBuilder: (context, index) => ItemCard(
+                product: products[index],
+                press: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          DetailsScreen(product: products[index]),
+                    )),
+              ),
             ),
           ),
         ),

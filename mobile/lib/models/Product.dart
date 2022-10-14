@@ -19,11 +19,11 @@ class Product {
 List<Product> products = [
   Product(
       "P01",
-      'RX',
+      'Test',
       50,
       20,
       "https://www.electrolux.vn/globalassets/appliances/fridge/vn-eqe6000a-b-fr-cl-1500x1500.png",
-      "Good",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
       "C01"),
   Product(
       "P02",

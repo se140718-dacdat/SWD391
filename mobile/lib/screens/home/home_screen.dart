@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 // ignore: import_of_legacy_library_into_null_safe
-import 'package:flutter_svg/flutter_svg.dart';
+// import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mobile/constants.dart';
 import 'package:mobile/screens/home/components/body.dart';
 
