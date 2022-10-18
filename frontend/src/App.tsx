@@ -8,6 +8,7 @@ import Menu from './components/modules/pagecomponents/Menu/Menu';
 import Main from './components/pages/Product/Main';
 import Login from './components/pages/Login/Login';
 import Product from './components/pages/Product/Product';
+import CreatePost from './components/pages/Post/CreatePost';
 function App() {
   const [user, setUser] = useState(1);
   return (
@@ -32,6 +33,7 @@ function App() {
           <Route path='/login' element={<Login />}></Route>
           <Route path='/' element={<Main />}></Route>
           <Route path='/product' element={<Product />}></Route>
+          <Route path='/create-post' element={<CreatePost />}></Route>
         </Routes>
       </BrowserRouter>
 

@@ -15,9 +15,11 @@
 #Product .product-summary {
     padding: 2em 2% 0 4%;
     border: 1px #ccc;
+    width: 100%;
 }
 
 #Product .product-name {
+    font-size: 1.7rem;
     line-height: 2rem;
     font-weight: bold;
     text-transform: capitalize;
@@ -68,4 +70,9 @@
 
 #Product .product-att-title {
     width: 40%;
+}
+
+#Product .description {
+    margin: 24px 0;
+    text-align: left;
 }

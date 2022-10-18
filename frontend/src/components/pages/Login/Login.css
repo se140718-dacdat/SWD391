@@ -15,6 +15,11 @@
     margin: 50px 0 100px 0;
 }
 
+#Login .reset-title {
+    font-style: bold;
+    color: var(--white-color);
+}
+
 #Login .login-title,
 #Login .vinhome-title {
     width: 100%;

@@ -1,7 +1,10 @@
 import { Form } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import "./Main.css";
+import Product from "./Product";
 
 const Main: React.FC = props => {
+    const navigate = useNavigate();
     return (
         <div id="Main" className="right-side">
             <div className="nav">
@@ -17,46 +20,46 @@ const Main: React.FC = props => {
                 </Form.Select>
             </div>
             <ul className="products">
-                <li className="item clearfix">
+                <li className="item clearfix" onClick={()=> {navigate('/product')}}>
                     <div className="item-img">
-                        <img src="https://demos.buddyboss.com/online-communities/wp-content/sandbox64720-uploads/2019/05/swim-trunk.png" alt="" />
+                        <img src="/images/ip14.png" alt="" />
                     </div>
                     <div className="item-cover">
-                        <h2 className="item-title">Classic swim trunk</h2>
-                        <span className="item-price">$150.0</span>
+                        <h2 className="item-title">iPhone 14 Pro 256GB | Chính hãng VN/A</h2>
+                        <span className="item-price">32.990.000 ₫</span>
                         <div className="space"></div>
                         <span className="item-store">Dat LU Store</span>
                     </div>
                 </li>
-                <li className="item clearfix">
+                <li className="item clearfix" onClick={()=> {return <Product/>}}>
                     <div className="item-img">
-                        <img src="https://demos.buddyboss.com/online-communities/wp-content/sandbox64720-uploads/2019/05/swim-trunk.png" alt="" />
+                        <img src="/images/ip14.png" alt="" />
                     </div>
                     <div className="item-cover">
-                        <h2 className="item-title">Classic swim trunk</h2>
-                        <span className="item-price">$150.0</span>
+                        <h2 className="item-title">iPhone 14 Pro 256GB | Chính hãng VN/A</h2>
+                        <span className="item-price">32.990.000 ₫</span>
                         <div className="space"></div>
                         <span className="item-store">Dat LU Store</span>
                     </div>
                 </li>
-                <li className="item clearfix">
+                <li className="item clearfix" onClick={()=> {return <Product/>}}>
                     <div className="item-img">
-                        <img src="https://demos.buddyboss.com/online-communities/wp-content/sandbox64720-uploads/2019/05/swim-trunk.png" alt="" />
+                        <img src="/images/ip14.png" alt="" />
                     </div>
                     <div className="item-cover">
-                        <h2 className="item-title">Classic swim trunk</h2>
-                        <span className="item-price">$150.0</span>
+                        <h2 className="item-title">iPhone 14 Pro 256GB | Chính hãng VN/A</h2>
+                        <span className="item-price">32.990.000 ₫</span>
                         <div className="space"></div>
                         <span className="item-store">Dat LU Store</span>
                     </div>
                 </li>
-                <li className="item clearfix">
+                <li className="item clearfix" onClick={()=> {return <Product/>}}>
                     <div className="item-img">
-                        <img src="https://demos.buddyboss.com/online-communities/wp-content/sandbox64720-uploads/2019/05/swim-trunk.png" alt="" />
+                        <img src="/images/ip14.png" alt="" />
                     </div>
                     <div className="item-cover">
-                        <h2 className="item-title">Classic swim trunk</h2>
-                        <span className="item-price">$150.0</span>
+                        <h2 className="item-title">iPhone 14 Pro 256GB | Chính hãng VN/A</h2>
+                        <span className="item-price">32.990.000 ₫</span>
                         <div className="space"></div>
                         <span className="item-store">Dat LU Store</span>
                     </div>

@@ -33,7 +33,7 @@ const Menu: React.FC = props => {
                         menuList.map((item, index) => {
                             return (
                                 <li className="menu-item">
-                                    <a href={`/${item.name}`} className="menu-item-link">
+                                    <a href="/" className="menu-item-link">
                                         {/* <i className={`menu-item-icon ${item.icon}`}></i> */}
                                         <span className="menu-item-name">{item.name}</span>
                                     </a>
@@ -41,7 +41,15 @@ const Menu: React.FC = props => {
                             )
                         })
                     }
-
+                </ul>
+                <p className="menu-title">Bài viết</p>
+                <ul className="menu-list">
+                    <li className="menu-item">
+                        <a href="/create-post" className="menu-item-link">
+                                        {/* <i className={`menu-item-icon ${item.icon}`}></i> */}
+                            <span className="menu-item-name">Đăng bài</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
