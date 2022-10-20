@@ -1,42 +1,70 @@
 import Container from 'react-bootstrap/Container';
 import React, { useState } from 'react';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import "./Header.css";
-import { Button, Form, Modal } from 'react-bootstrap';
-const Header: React.FC = props => {
-
+import "./UserHeader.css";
+import { Nav, Navbar, OverlayTrigger, Tooltip, NavDropdown, Dropdown } from 'react-bootstrap';
+const UserHeader: React.FC = props => {
     const [show, setShow] = useState(false);
-
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const renderTooltip = (props: String) => (
+        <Tooltip id="button-tooltip" {...props}>
+          {props}
+        </Tooltip>
+      );
     return (
-        <div id="Header">
+        <div id="UserHeader">
             <Navbar className="header-navbar" collapseOnSelect expand="lg" bg="light" variant="light">
                 <Container>
                     <Navbar.Brand href="#home"><img className="vin-icon" src="/images/vin-icon.jpg"></img></Navbar.Brand>
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">
                             <Nav.Link href="/">Home</Nav.Link>
-                            {/* <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
-                                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.2">
-                                    Another action
-                                </NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                                <NavDropdown.Divider />
-                                <NavDropdown.Item href="#action/3.4">
-                                    Separated link
-                                </NavDropdown.Item>
-                            </NavDropdown> */}
+                            <Nav.Link href="/">Post</Nav.Link>
                         </Nav>
                         <Nav className="search">
                             <i className="pi pi-search"></i>
                             <input type="search" className="search-bar" placeholder='Search...' />
                         </Nav>
-                        <Nav>
-                            <Nav.Link href="/login"><Button className="btn-primary-color" variant="primary">Login</Button></Nav.Link>
+                        <Nav className="nav-icon">
+                            <OverlayTrigger
+                                placement="bottom"
+                                delay={{ show: 250, hide: 400 }}
+                                overlay={renderTooltip("Messages")}
+                                >
+                                <i className = "pi pi-inbox"></i>
+                            </OverlayTrigger>
+                        </Nav>
+                        <Nav className="nav-icon">
+                            <OverlayTrigger
+                                placement="bottom"
+                                delay={{ show: 250, hide: 400 }}
+                                overlay={renderTooltip("Notifications")}
+                                >
+                                <i className = "pi pi-bell"></i>
+                            </OverlayTrigger>
+                        </Nav>
+                        <Nav className="nav-icon">
+                            <OverlayTrigger
+                                placement="bottom"
+                                delay={{ show: 250, hide: 400 }}
+                                overlay={renderTooltip("Cart")}
+                                >
+                                <i className = "pi pi-shopping-cart"></i>
+                            </OverlayTrigger>
+                        </Nav>
+                        <Nav className='user-wrap'>
+                            <span className='user-name'>Đắc Đạt</span>
+                            <img src="/images/user-avt.png" alt="user-avt" className='user-avt' />
+                            <div className="user-option">
+                                <div className="user-info">
+                                <img src="/images/user-avt.png" alt="user-avt" className='user-info-avt' />
+                                    <div className='block'>
+                                        <span className='user-info-name'>Đắc Đạt</span>
+                                        <span className='user-info-email'>datlhdse140718@fpt.edu.vn</span>
+                                    </div>
+                                </div>
+                            </div>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
@@ -78,4 +106,4 @@ const Header: React.FC = props => {
     );
 }
 
-export default Header;
+export default UserHeader;

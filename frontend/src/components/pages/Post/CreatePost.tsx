@@ -17,23 +17,44 @@ const CreatePost: React.FC = props => {
                             <input type="text" className="input-value" />
                         </div>
                         <div className="input inline-block">
-                            <div className="input-title">Short description</div>
-                            <input type="text" className="input-value" />
-                        </div>
-                        <div className="input inline-block">
                             <div className="input-title">Dimensions</div>
                             <input type="text" className="input-value" />
                         </div>
                         <div className="input inline-block">
                             <div className="input-title">Image</div>
                             <div className="input-value">
-                                <input type="text" />
-                                <button>Add Media</button>
+                                <input type="text" className="input-img" />
+                                <button  className="btn-add-img">Add Media</button>
                             </div>
                         </div>
                     </div>
                 );
-                break;
+            case "inventory":
+                return(
+                    <div className="post-input">
+                    <div className="input inline-block">
+                           <div className="input-title">SKU</div>
+                           <input type="text" className="input-value" />
+                       </div>
+                       <div className="input inline-block">
+                           <div className="input-title">Stock quantity</div>
+                           <input type="text" className="input-value" />
+                       </div>
+               </div>
+                );
+            case "description":
+                return(
+                    <div className="post-input">
+                    <div className="input inline-block">
+                           <div className="input-title">Short description</div>
+                           <input type="text" className="input-value" />
+                       </div>
+                       <div className="input inline-block">
+                           <div className="input-title">Description</div>
+                           <input type="text" className="input-value" />
+                       </div>
+               </div>
+                );
         }
     }
     return(
@@ -83,9 +104,9 @@ const CreatePost: React.FC = props => {
             </div>
             <div className="post-data">
                 <ul className="options">
-                    <li className="option">General</li>
-                    <li className="option">Inventory</li>
-                    <li className="option">Description</li>
+                    <li className="option" onClick={()=>{setInput('generate')}}>General</li>
+                    <li className="option" onClick={()=>{setInput('inventory')}}>Inventory</li>
+                    <li className="option" onClick={()=>{setInput('description')}}>Description</li>
                 </ul>
                     {renderSwitch()}
 

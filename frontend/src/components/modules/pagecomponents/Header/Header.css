@@ -19,7 +19,7 @@
     width: 400px;
     height: 40px;
     background-color: var(--primary-bar);
-    border-radius: 6px;
+    border-radius: 10px;
     display: flex;
     align-items: center;
     padding: 8px;

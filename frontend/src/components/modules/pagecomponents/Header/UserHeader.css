@@ -1,0 +1,96 @@
+#UserHeader {
+    border-bottom: 1px solid #ccc;
+    width: 100%;
+    position: fixed;
+    z-index: 12;
+}
+
+#UserHeader .vin-icon {
+    width: 90px;
+    padding-right: 24px;
+}
+
+#UserHeader .navbar-collapse {
+    font-weight: bold;
+    font-size: 18px
+}
+
+#UserHeader .search {
+    width: 400px;
+    height: 40px;
+    background-color: var(--primary-bar);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    margin-right: 12px;
+}
+
+#UserHeader .search-bar {
+    height: 40px;
+    margin-left: 8px;
+    border: none;
+    outline: none;
+    background-color: var(--primary-bar);
+    flex: 1;
+}
+
+#UserHeader .search>i {
+    color: #777;
+    font-size: 20px
+}
+
+#UserHeader .user-wrap {
+    margin-left: 32px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+}
+
+#UserHeader .user-avt {
+    width: 36px;
+    height: 36px;
+    border-radius: 50px;
+}
+
+#UserHeader .user-name {
+    font-weight: 600;
+    margin-right: 10px;
+    color: #393e41;
+    font-size: 1rem;
+}
+
+#UserHeader .nav-icon {
+    cursor: pointer;
+    margin: 0 12px;
+}
+
+#UserHeader .user-option {
+    z-index: 24;
+    top: 120%;
+    right: 0%;
+    position: absolute;
+    width: 300px;
+    padding: 24px;
+    box-shadow: 0 6px 24px 0 rgb(0 0 0 / 12%), 0 3px 8px 0 rgb(0 0 0 / 6%);
+    border-radius: 5px;
+    background-color: #ffff;
+}
+
+#UserHeader .user-info-avt {
+    width: 64px;
+    height: 64px;
+    border-radius: 50px;
+    margin-right: 12px;
+}
+
+#UserHeader .user-info > * {
+    display: inline-block;
+}
+
+#UserHeader .user-info-email {
+    font-size: 12px;
+    color: #aaaaaa;
+    font-weight: 600;
+}

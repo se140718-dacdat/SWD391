@@ -6,21 +6,57 @@ import "./Menu.css";
 const Menu: React.FC = props => {
     const [checked, isChecked] = useState();
 
-    const menuList = [{
-        name: "Lướt xem tất cả"
-    },
+    const menuList = [
     {
-        name: "Xe cộ"
+        name: "Bất động sản",
+        icon: "https://static.chotot.com/storage/categories/all-category-v3/1000.png"
     }, {
-        name: "Bán nhà"
+        name: "Xe cộ",
+        icon: "https://static.chotot.com/storage/categories/all-category-v3/2000.png"
     }, {
-        name: "Đồ gia dụng"
+        name: "Đồ điện tử",
+        icon: "https://static.chotot.com/storage/categories/all-category-v3/5000.png"
     }, {
-        name: "Đồ may mặc"
+        name: "Việc làm",
+        icon: "https://static.chotot.com/storage/categories/all-category-v3/13000.png"
     }, {
-        name: "Đồ điện tử"
+        name: "Thú cưng",
+        icon: "https://static.chotot.com/storage/categories/all-category-v3/12000.png"
     }, {
-        name: "Rao vặt"
+        name: "Đồ ăn, thực phẩm và các loại khác",
+        icon: "https://static.chotot.com/storage/categories/all-category-v3/7000.png"
+    }
+    , {
+        name: "Tủ lạnh, máy lạnh, máy giặt",
+        icon: "https://static.chotot.com/storage/categories/all-category-v3/9000.png"
+    }
+    , {
+        name: "Đồ gia dụng, nội thất, cây cảnh",
+        icon: "https://static.chotot.com/storage/categories/all-category-v3/14000.png"
+    }
+    , {
+        name: "Mẹ và bé",
+        icon: "https://static.chotot.com/storage/categories/all-category-v3/11000.png"
+    }
+    , {
+        name: "Thời trang",
+        icon: "https://static.chotot.com/storage/categories/all-category-v3/3000.png"
+    }
+    , {
+        name: "Đồ dùng cá nhân",
+        icon: "https://static.chotot.com/storage/categories/all-category-v3/4000.png"
+    }
+    , {
+        name: "Giải trí, Thể thao, Sở thích",
+        icon: "https://static.chotot.com/storage/categories/all-category-v3/8000.png"
+    }
+    , {
+        name: "Đồ dùng văn phòng, công nông nghiệp",
+        icon: "https://static.chotot.com/storage/categories/all-category-v3/6000.png"
+    }
+    , {
+        name: "Dịch vụ, Du lịch",
+        icon: "https://static.chotot.com/storage/categories/all-category-v3/2000.png"
     }
     ];
 
@@ -32,9 +68,9 @@ const Menu: React.FC = props => {
                     {
                         menuList.map((item, index) => {
                             return (
-                                <li className="menu-item">
+                                <li className="menu-item clear-fix">
                                     <a href="/" className="menu-item-link">
-                                        {/* <i className={`menu-item-icon ${item.icon}`}></i> */}
+                                        <img className= "menu-item-icon" src={item.icon}></img>
                                         <span className="menu-item-name">{item.name}</span>
                                     </a>
                                 </li>

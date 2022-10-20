@@ -9,25 +9,29 @@ import Main from './components/pages/Product/Main';
 import Login from './components/pages/Login/Login';
 import Product from './components/pages/Product/Product';
 import CreatePost from './components/pages/Post/CreatePost';
+import UserHeader from './components/modules/pagecomponents/Header/UserHeader';
 function App() {
   const [user, setUser] = useState(1);
+  const renderAuth = () => {
+    switch (user) {
+      case 0:
+          return <Header />;
+      case 1:
+          return <UserHeader />
+      case 2:
+        return <AdminHeader />;
+    }
+  }
   return (
     <div id="App">
       <BrowserRouter>
         {(() => {
-          switch (user) {
-            case 0:
-                return <Login />;
-            case 1:
-              return (
-              <div>
-                <Header />
-                      <Menu />
-                </div>);
-              
-            case 2:
-              return <AdminHeader />;
-          }
+          return (
+            <div>
+              {renderAuth()}
+              <Menu />  
+            </div>
+          )
         })()}
         <Routes>
           <Route path='/login' element={<Login />}></Route>

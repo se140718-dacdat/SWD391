@@ -7,11 +7,8 @@ const Main: React.FC = props => {
     const navigate = useNavigate();
     return (
         <div id="Main" className="right-side">
-            <div className="nav">
-                <a className="link">Trang chủ</a>&nbsp;/&nbsp;<a className="link">Xem tất cả</a>
-            </div>
             <div className="nav-title">
-                <h3>Lướt xem tất cả</h3>
+                <h3>Đồ điện tử</h3>
                 <Form.Select aria-label="Default select example" className="filter">
                     <option>Mặc định</option>
                     <option value="1">One</option>
