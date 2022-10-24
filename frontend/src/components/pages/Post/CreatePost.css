@@ -1,31 +1,71 @@
 #CreatePost {
-    background: #f0f0f1;
+    height: auto;
 }
 
-#CreatePost .post-data {
+#CreatePost .post-wrap {
+    border-radius: 10px;
+    padding: 40px;
+    margin-top: 30px;
     background: var(--white-color);
     display: flex;
     width: 100%;
     flex-wrap: nowrap;
 }
 
-#CreatePost .options {
-    background-color: #fafafa;
+#CreatePost .post-img {
     padding: 0;
     list-style: none;
-    width: 18%;
-    border-right: solid 1px #eee;
+    width: 25%;
     margin-bottom: 0;
 }
 
-#CreatePost .option {
-    padding: 10px;
-    border-bottom: solid 1px #eee;
+#CreatePost .input-img {
+    height: 225px;
+    width: 290px;
+    background-color: #f4f4f4;
+    border: 2px dotted #fe9900;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 4px;
     cursor: pointer;
 }
-#CreatePost .post-input {
-    width: 52%;
-    padding: 20px;
+
+.ffyigpx {
+    position: absolute;
+    margin-top: -14px;
+    margin-left: -4px;
+}
+
+.t1sn01m8 {
+    margin-top: 8px;
+    text-align: center;
+    color: #9b9b9b;
+    font-size: .625rem;
+}
+
+.s6ete4 {
+    padding: 3px 0;
+}
+
+#CreatePost .post-data {
+    margin-left: 100px;
+    padding: 30px;
+    width: 100%;
+}
+
+#CreatePost .post-data>* {
+    outline: none;
+    border-radius: 4px;
+    width: 100%;
+    height: 46px;
+    margin-bottom: 24px;
+}
+
+#CreatePost .post-data>h1 {
+    border: none;
+    font-size: 24px
 }
 
 #CreatePost .input {
@@ -33,30 +73,121 @@
     width: 100%;
 }
 
-#CreatePost .w-30 {
-    width: 30%;
-}
-
-
 #CreatePost .input-title {
-    width: 30%;
-    font-size: 13px;
+    width: 25%;
+    font-size: 18px;
 }
 
-#CreatePost .input-value,
-#CreatePost .input-img {
-    width: 70%;
+#CreatePost .input-value {
+    padding-left: 8px;
+    border: 1px solid #cacaca;
+    outline: none;
+    height: 46px;
+    width: 75%;
     border-radius: 5px;
 }
 
-#CreatePost .input-img {
-    width: 71%;
+#CreatePost .btn-wrap {
+    margin-bottom: 50px;
+    display: flex;
+    wrap: none;
+    justify-content: space-between;
 }
 
-#CreatePost .btn-add-img {
-    margin-left: 10px;
-    color: #2271b1;
-    background-color: #f6f7f7;
-    border-color: #2271b1;
-    border-radius: 3px;
+#CreatePost .btn-wrap button {
+    height: 46px;
+    font-weight: 400;
+    border-radius: 4px;
+    width: 45%;
+}
+
+#CreatePost .btn-preview-edit {
+    background-color: var(--white-color);
+    color: var(--primary-button);
+    border: solid var(--primary-button);
+}
+
+#CreatePost .btn-upload {
+    background-color: var(--primary-button);
+    color: var(--white-color);
+    border: none;
+}
+
+
+/* PREVIEW */
+
+#CreatePost .product-type {
+    display: flex;
+}
+
+#CreatePost .product-img img {
+    border-radius: 10px 0 0 10px;
+    width: 600px;
+    height: 600px;
+}
+
+#CreatePost .product-summary {
+    padding: 2em 2% 0 4%;
+    border: 1px #ccc;
+    width: 100%;
+}
+
+#CreatePost .product-name {
+    font-size: 1.7rem;
+    line-height: 2rem;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+#CreatePost .product-price {
+    font-weight: 500;
+    font-size: 1.25rem;
+    margin: 24px 0;
+}
+
+#CreatePost .btn-addtocart {
+    margin: 24px 0;
+    background-color: var(--primary-button);
+    padding: 8px 32px;
+    color: var(--white-color);
+    text-transform: capitalize;
+    border: none;
+    border-radius: 8px;
+}
+
+#CreatePost h4 {
+    font-size: 12px;
+    border-bottom: 1px solid #ccc;
+    margin: 4px 0;
+}
+
+#CreatePost .category-wrapper .product-att,
+#CreatePost .tag-wrapper .product-att {
+    color: var(--primary-color);
+}
+
+#CreatePost .availability-wrapper .product-att {
+    color: #77a464;
+}
+
+#CreatePost .product-information {
+    color: #aaaaaa;
+    font-weight: 400;
+    font-size: 0.9rem;
+}
+
+#CreatePost .product-information>span {
+    display: flex;
+    align-items: center;
+    flex-flow: wrap;
+    margin: 8px 0;
+}
+
+#CreatePost .product-att-title {
+    width: 40%;
+}
+
+#CreatePost .description {
+    margin: 24px 0;
+    text-align: left;
 }

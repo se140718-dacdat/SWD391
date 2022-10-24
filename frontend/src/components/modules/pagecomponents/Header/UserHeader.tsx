@@ -1,17 +1,26 @@
 import Container from 'react-bootstrap/Container';
 import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./UserHeader.css";
+import { useDispatch, useSelector } from "react-redux";
 import { Nav, Navbar, OverlayTrigger, Tooltip, NavDropdown, Dropdown } from 'react-bootstrap';
+import { logoutUser } from '../../../../redux/apiRequest';
 const UserHeader: React.FC = props => {
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const user = useSelector((state: any) => state.auth.login.currentUser.data);
+    const accessToken = user?.jwtToken;
+    const username = user?.fullName;
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const logout = () => {
+        logoutUser(dispatch, username, navigate, accessToken);
+    }
+    const [show, setShow] = useState("display-none");
     const renderTooltip = (props: String) => (
         <Tooltip id="button-tooltip" {...props}>
-          {props}
+            {props}
         </Tooltip>
-      );
+    );
     return (
         <div id="UserHeader">
             <Navbar className="header-navbar" collapseOnSelect expand="lg" bg="light" variant="light">
@@ -20,7 +29,7 @@ const UserHeader: React.FC = props => {
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">
                             <Nav.Link href="/">Home</Nav.Link>
-                            <Nav.Link href="/">Post</Nav.Link>
+                            <Nav.Link href="/create-post">Post</Nav.Link>
                         </Nav>
                         <Nav className="search">
                             <i className="pi pi-search"></i>
@@ -31,8 +40,8 @@ const UserHeader: React.FC = props => {
                                 placement="bottom"
                                 delay={{ show: 250, hide: 400 }}
                                 overlay={renderTooltip("Messages")}
-                                >
-                                <i className = "pi pi-inbox"></i>
+                            >
+                                <i className="pi pi-inbox"></i>
                             </OverlayTrigger>
                         </Nav>
                         <Nav className="nav-icon">
@@ -40,8 +49,8 @@ const UserHeader: React.FC = props => {
                                 placement="bottom"
                                 delay={{ show: 250, hide: 400 }}
                                 overlay={renderTooltip("Notifications")}
-                                >
-                                <i className = "pi pi-bell"></i>
+                            >
+                                <i className="pi pi-bell"></i>
                             </OverlayTrigger>
                         </Nav>
                         <Nav className="nav-icon">
@@ -49,21 +58,26 @@ const UserHeader: React.FC = props => {
                                 placement="bottom"
                                 delay={{ show: 250, hide: 400 }}
                                 overlay={renderTooltip("Cart")}
-                                >
-                                <i className = "pi pi-shopping-cart"></i>
+                            >
+                                <i className="pi pi-shopping-cart"></i>
                             </OverlayTrigger>
                         </Nav>
-                        <Nav className='user-wrap'>
-                            <span className='user-name'>Đắc Đạt</span>
+                        <Nav className='user-wrap' onClick={() => {
+                            (show == "") ?
+                                setShow("display-none")
+                                : setShow("")
+                        }}>
+                            <span className='user-name'>{username}</span>
                             <img src="/images/user-avt.png" alt="user-avt" className='user-avt' />
-                            <div className="user-option">
+                            <div className={`user-option ${show}`}>
                                 <div className="user-info">
-                                <img src="/images/user-avt.png" alt="user-avt" className='user-info-avt' />
-                                <div className='block'>
-                                    <span className='user-info-name'>Đắc Đạt</span>
-                                    <span className='user-info-email'>datlhdse140718@fpt.edu.vn</span>
+                                    <img src="/images/user-avt.png" alt="user-avt" className='user-info-avt' />
+                                    <div className='block'>
+                                        <span className='user-info-name'>{username}</span>
+                                        <span className='user-info-email'>datlhdse140718@fpt.edu.vn</span>
+                                    </div>
                                 </div>
-                                </div>
+                                <button className="btn-logout" onClick={() => { logout() }}>Logout</button>
                             </div>
                         </Nav>
                     </Navbar.Collapse>

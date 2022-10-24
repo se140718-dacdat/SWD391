@@ -41,6 +41,7 @@
 }
 
 #UserHeader .user-wrap {
+    user-select: none;
     margin-left: 32px;
     display: flex;
     align-items: center;
@@ -85,7 +86,7 @@
     margin-right: 12px;
 }
 
-#UserHeader .user-info > * {
+#UserHeader .user-info>* {
     display: inline-block;
 }
 

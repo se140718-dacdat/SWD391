@@ -2,10 +2,6 @@
     display: flex;
 }
 
-#Product .product-img {
-   
-}
-
 #Product .product-img img {
     border-radius: 10px 0 0 10px;
     width: 600px;
@@ -61,7 +57,8 @@
     font-weight: 400;
     font-size: 0.9rem;
 }
-#Product .product-information > span {
+
+#Product .product-information>span {
     display: flex;
     align-items: center;
     flex-flow: wrap;

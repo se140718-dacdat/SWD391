@@ -10,16 +10,18 @@ import Login from './components/pages/Login/Login';
 import Product from './components/pages/Product/Product';
 import CreatePost from './components/pages/Post/CreatePost';
 import UserHeader from './components/modules/pagecomponents/Header/UserHeader';
+import { useSelector } from 'react-redux';
+
 function App() {
-  const [user, setUser] = useState(1);
+  const user = useSelector((state: any) => state.auth.login.currentUser);
   const renderAuth = () => {
-    switch (user) {
-      case 0:
-          return <Header />;
-      case 1:
-          return <UserHeader />
-      case 2:
+    switch (user?.data.role) {
+      case "USER":
+        return <UserHeader />
+      case "ADMIN":
         return <AdminHeader />;
+      default:
+        return <Header />;
     }
   }
   return (
@@ -29,7 +31,7 @@ function App() {
           return (
             <div>
               {renderAuth()}
-              <Menu />  
+              <Menu />
             </div>
           )
         })()}
