@@ -59,10 +59,10 @@ const UserHeader: React.FC = props => {
                             <div className="user-option">
                                 <div className="user-info">
                                 <img src="/images/user-avt.png" alt="user-avt" className='user-info-avt' />
-                                    <div className='block'>
-                                        <span className='user-info-name'>Đắc Đạt</span>
-                                        <span className='user-info-email'>datlhdse140718@fpt.edu.vn</span>
-                                    </div>
+                                <div className='block'>
+                                    <span className='user-info-name'>Đắc Đạt</span>
+                                    <span className='user-info-email'>datlhdse140718@fpt.edu.vn</span>
+                                </div>
                                 </div>
                             </div>
                         </Nav>
