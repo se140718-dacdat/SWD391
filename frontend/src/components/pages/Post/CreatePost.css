@@ -90,7 +90,6 @@
 #CreatePost .btn-wrap {
     margin-bottom: 50px;
     display: flex;
-    wrap: none;
     justify-content: space-between;
 }
 
