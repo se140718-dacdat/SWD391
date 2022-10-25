@@ -70,3 +70,11 @@
 .display-none {
     display: none !important;
 }
+
+.mt-200 {
+    margin-top: 200px;
+}
+
+.flex {
+    display: flex;
+}

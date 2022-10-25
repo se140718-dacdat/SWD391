@@ -73,6 +73,10 @@
     width: 100%;
 }
 
+#CreatePost .input textarea {
+    height: 200px;
+}
+
 #CreatePost .input-title {
     width: 25%;
     font-size: 18px;
