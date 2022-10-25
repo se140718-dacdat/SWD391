@@ -1,9 +1,15 @@
 import "./CreatePost.css";
-import React, { useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 import { Form } from "react-bootstrap";
+import { Post } from "../../../model";
 
 const CreatePost: React.FC = props => {
     const [preview, isPreview] = useState<String>("Preview");
+    const [post, setPost] = useState<Post>();
+    const [select, setSelect] = useState<String>("");
+    const handleChange = (e: FormEvent) => {
+        setSelect(e.target.value);
+    }
     const renderSwitch = () => {
         switch (preview) {
             case "Preview":
