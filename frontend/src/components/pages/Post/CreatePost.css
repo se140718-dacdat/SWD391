@@ -32,6 +32,10 @@
     cursor: pointer;
 }
 
+#CreatePost .select * {
+    padding: 12px 0;
+}
+
 .ffyigpx {
     position: absolute;
     margin-top: -14px;

@@ -13,12 +13,22 @@ export const loginUser = async(user, dispatch, navigate) => {
     }
 };
 
-export const logoutUser = async(dispatch, id, navigate, accessToken) => {
+export const logoutUser = async(dispatch, navigate) => {
     dispatch(logoutStart());
     try {
         dispatch(logoutSuccess());
         navigate("/");
     } catch (err) {
         dispatch(logoutFailed());
+    }
+}
+
+export const getCategoryById = async(id) => {
+    try {
+        const res = await fetch(`https://localhost:5001/api/categories/${id}`);
+        const data = await res.json();
+        return data;
+    } catch (error) {
+        return error;
     }
 }

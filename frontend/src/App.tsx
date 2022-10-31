@@ -11,6 +11,7 @@ import Product from './components/pages/Product/Product';
 import CreatePost from './components/pages/Post/CreatePost';
 import UserHeader from './components/modules/pagecomponents/Header/UserHeader';
 import { useSelector } from 'react-redux';
+import Filter from './components/pages/Product/Filter';
 
 function App() {
   const user = useSelector((state: any) => state.auth.login.currentUser);
@@ -38,6 +39,7 @@ function App() {
         <Routes>
           <Route path='/login' element={<Login />}></Route>
           <Route path='/' element={<Main />}></Route>
+          <Route path='/:id' element={<Filter />}></Route>
           <Route path='/product' element={<Product />}></Route>
           <Route path='/create-post' element={<CreatePost />}></Route>
         </Routes>

@@ -39,7 +39,7 @@
 }
 
 #Main .item-cover .item-store {
-    float: inline-end;
+    margin-top: 80px;
 }
 
 #Main .item-img {
@@ -59,6 +59,12 @@
     font-weight: bold;
 }
 
+#Main .item-name {
+    font-size: 1.2rem;
+    color: var(--black-color);
+    font-weight: bold;
+}
+
 /*
 
 #Main .item * {
@@ -74,11 +80,7 @@
 
 
 
-#Main .item-title {
-    font-size: 1rem;
-    color: var(--black-color);
-    font-weight: bold;
-}
+
 
 #Main .item-price {
     margin-bottom: 0.5rem;

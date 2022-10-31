@@ -64,15 +64,23 @@
 }
 
 .block * {
-    display: block;
+    display: block !important;
+}
+
+#App .display {
+    display: block !important;
 }
 
 .display-none {
     display: none !important;
 }
 
-.mt-200 {
-    margin-top: 200px;
+.mt-180 {
+    margin-top: 180px;
+}
+
+.mt-250 {
+    margin-top: 250px;
 }
 
 .flex {

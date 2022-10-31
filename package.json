@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "react-select": "^5.5.7",
+    "redux-persist": "^6.0.0"
+  }
+}

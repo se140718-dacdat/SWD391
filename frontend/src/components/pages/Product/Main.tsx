@@ -1,14 +1,30 @@
 import { Form } from "react-bootstrap";
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import "./Main.css";
-import Product from "./Product";
+import { Category, PostShow } from "../../../model";
 
-const Main: React.FC = props => {
+const Main = () => {
+    const [posts, setPosts] = useState<PostShow[]>([]);
     const navigate = useNavigate();
+    const category: Category = {
+        id: "",
+        name: "All Categories",
+        icon: "https://pic.onlinewebfonts.com/svg/img_123607.png"
+    };
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+    async function fetchData() {
+        const response = await fetch("https://localhost:5001/api/posts");
+        const data = await response.json();
+        setPosts(data.data);
+    }
     return (
         <div id="Main" className="right-side">
             <div className="nav-title">
-                <h3>Đồ điện tử</h3>
+                <h3>{category.name}</h3>
                 <Form.Select aria-label="Default select example" className="filter">
                     <option>Mặc định</option>
                     <option value="1">One</option>
@@ -17,50 +33,23 @@ const Main: React.FC = props => {
                 </Form.Select>
             </div>
             <ul className="products">
-                <li className="item clearfix" onClick={()=> {navigate('/product')}}>
-                    <div className="item-img">
-                        <img src="/images/ip14.png" alt="" />
-                    </div>
-                    <div className="item-cover">
-                        <h2 className="item-title">iPhone 14 Pro 256GB | Chính hãng VN/A</h2>
-                        <span className="item-price">32.990.000 ₫</span>
-                        <div className="space"></div>
-                        <span className="item-store">Dat LU Store</span>
-                    </div>
-                </li>
-                <li className="item clearfix" onClick={()=> {return <Product/>}}>
-                    <div className="item-img">
-                        <img src="/images/ip14.png" alt="" />
-                    </div>
-                    <div className="item-cover">
-                        <h2 className="item-title">iPhone 14 Pro 256GB | Chính hãng VN/A</h2>
-                        <span className="item-price">32.990.000 ₫</span>
-                        <div className="space"></div>
-                        <span className="item-store">Dat LU Store</span>
-                    </div>
-                </li>
-                <li className="item clearfix" onClick={()=> {return <Product/>}}>
-                    <div className="item-img">
-                        <img src="/images/ip14.png" alt="" />
-                    </div>
-                    <div className="item-cover">
-                        <h2 className="item-title">iPhone 14 Pro 256GB | Chính hãng VN/A</h2>
-                        <span className="item-price">32.990.000 ₫</span>
-                        <div className="space"></div>
-                        <span className="item-store">Dat LU Store</span>
-                    </div>
-                </li>
-                <li className="item clearfix" onClick={()=> {return <Product/>}}>
-                    <div className="item-img">
-                        <img src="/images/ip14.png" alt="" />
-                    </div>
-                    <div className="item-cover">
-                        <h2 className="item-title">iPhone 14 Pro 256GB | Chính hãng VN/A</h2>
-                        <span className="item-price">32.990.000 ₫</span>
-                        <div className="space"></div>
-                        <span className="item-store">Dat LU Store</span>
-                    </div>
-                </li>
+                {
+                    posts?.map((item, index) => {
+                        return (
+                            <li key={index} className="item clearfix" onClick={() => { navigate('/product') }}>
+                                <div className="item-img">
+                                    <img src={item.imageUrl} alt="" />
+                                </div>
+                                <div className="item-cover">
+                                    <h2 className="item-title">{item.title}</h2>
+                                    <h2 className="item-name">{item.product.name}</h2>
+                                    <span className="item-price">{`${item.price} đ`}</span>
+                                    <span className="item-store">{`${item.building.name}-${item.building.address}`}</span>
+                                </div>
+                            </li>
+                        );
+                    })
+                }
             </ul>
         </div>
     );
