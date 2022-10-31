@@ -23,10 +23,36 @@ const UserHeader: React.FC = props => {
                             <img src="https://cdn.shopify.com/s/files/1/0814/0539/products/p191213_Barrel_46_Whiskey_Espresso_1123_1080px_600x.jpg?v=1666056574" style = {{width: "36px", height: "36px"}} alt="" className="item-img" />
                             <span className="item-name">Rosewood Watch</span>
                         </a>
-                        <span className="item-quantity">1 × $165.00</span>
-                        <a href="" className="item-remov">x</a>
+                        <div>
+                            <span className="item-quantity">1 × $165.00</span>
+                            <a href="" className="item-remove">x</a>
+                        </div>
+                    </li>
+                    <li className="cart-item-wrap">
+                        <a href="" className="cart-item">
+                            <img src="https://cdn.shopify.com/s/files/1/0814/0539/products/p191213_Barrel_46_Whiskey_Espresso_1123_1080px_600x.jpg?v=1666056574" style = {{width: "36px", height: "36px"}} alt="" className="item-img" />
+                            <span className="item-name">Rosewood Watch</span>
+                        </a>
+                        <div>
+                            <span className="item-quantity">1 × $165.00</span>
+                            <a href="" className="item-remove">x</a>
+                        </div>
+                    </li>
+                    <li className="cart-item-wrap">
+                        <a href="" className="cart-item">
+                            <img src="https://cdn.shopify.com/s/files/1/0814/0539/products/p191213_Barrel_46_Whiskey_Espresso_1123_1080px_600x.jpg?v=1666056574" style = {{width: "36px", height: "36px"}} alt="" className="item-img" />
+                            <span className="item-name">Rosewood Watch</span>
+                        </a>
+                        <div>
+                            <span className="item-quantity">1 × $165.00</span>
+                            <a href="" className="item-remove">x</a>
+                        </div>
                     </li>
                 </ul>
+                <div className="cart-footer">
+                    <div className='total'><strong>Total: </strong>$1725000</div>
+                    <button className="btn-checkout btn-primary-color">Checkout</button>
+                </div>
             </div>
         )
     }

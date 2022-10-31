@@ -1,0 +1,50 @@
+#Cart .cart-wrapper {
+    padding: 15px 20px;
+}
+
+#Cart table {
+    width: 100%;
+    text-align: left;
+    border-collapse: separate;
+    border: 0;
+    border-radius: 5px;
+    empty-cells: show;
+}
+
+#Cart thead {
+    border-bottom: 1px solid #e0dfdb;
+}
+
+#Cart thead * {
+    text-transform: uppercase;
+    font-weight: normal;
+    color: #aaa;
+    font-size: 14px;
+}
+
+#Cart th {
+    padding: 9px 12px;
+    line-height: 1.5rem;
+    vertical-align: middle;
+}
+
+#Cart tr {
+    border-bottom: 1px solid #aaa;
+}
+
+#Cart .btn-remove {
+    font-weight: 100;
+    height: 1em;
+    width: 1em;
+    font-size: 25.2px;
+    color: #aaa;
+    text-align: center;
+    border-radius: 50px;
+    line-height: 20px;
+}
+
+#Cart .btn-remove:hover {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    cursor: pointer;
+}

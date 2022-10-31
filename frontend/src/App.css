@@ -36,6 +36,7 @@
     background-color: var(--primary-button) !important;
     padding: 6px 20px;
     border: none;
+    color: var(--white-color);
 }
 
 #App .link {
