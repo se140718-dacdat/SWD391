@@ -1,12 +1,13 @@
 #Cart .cart-wrapper {
     padding: 15px 20px;
+    border: 1px solid #e0dfdb;
+    border-radius: 10px;
 }
 
 #Cart table {
     width: 100%;
     text-align: left;
-    border-collapse: separate;
-    border: 0;
+    border-collapse: collapse;
     border-radius: 5px;
     empty-cells: show;
 }
@@ -28,8 +29,9 @@
     vertical-align: middle;
 }
 
-#Cart tr {
-    border-bottom: 1px solid #aaa;
+#Cart td {
+    border-bottom: 1px solid rgba(0,0,0,.1);
+    padding: 9px 12px;
 }
 
 #Cart .btn-remove {
@@ -47,4 +49,43 @@
     background-color: var(--primary-color);
     color: var(--white-color);
     cursor: pointer;
+}
+
+#Cart .product-font {
+    font-weight: 400;
+    font-size: 14px;
+    text-transform: capitalize;
+}
+
+
+#Cart .product-name:hover {
+    color: var(--primary-color);
+    cursor: pointer;
+}
+
+#Cart .subtotal *{
+    text-transform: uppercase;
+    font-weight: 400;
+}
+
+#Cart .process-checkout {
+    clear: both;
+    text-align: right;
+    padding: 16px 0;
+}
+
+#Cart .btn-checkout {
+    padding: 9px 28px;
+    border-radius: 6px;
+}
+
+#Cart .total {
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+#Cart .cart-total td {
+    border: none;
+    float: right;
 }

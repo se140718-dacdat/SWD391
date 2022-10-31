@@ -25,7 +25,7 @@ const UserHeader: React.FC = props => {
                         </a>
                         <div>
                             <span className="item-quantity">1 × $165.00</span>
-                            <a href="" className="item-remove">x</a>
+                            <a href="" className="item-remove fs-16">×</a>
                         </div>
                     </li>
                     <li className="cart-item-wrap">
@@ -154,39 +154,6 @@ const UserHeader: React.FC = props => {
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
-            {/* <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Login</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <Form>
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                            <Form.Label>Email address</Form.Label>
-                            <Form.Control
-                                type="email"
-                                placeholder="Email address"
-                                autoFocus
-                            />
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
-                            <Form.Label>Password</Form.Label>
-                            <Form.Control
-                                type="email"
-                                placeholder="Password"
-                                autoFocus
-                            />
-                        </Form.Group>
-                    </Form>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        Close
-                    </Button>
-                    <Button style={{ backgroundColor: "#606099", border: "none", padding: "6px 20px" }} variant="primary" onClick={handleClose}>
-                        Login
-                    </Button>
-                </Modal.Footer>
-            </Modal> */}
         </div>
     );
 }

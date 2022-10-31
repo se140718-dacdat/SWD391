@@ -81,8 +81,10 @@
 #UserHeader .item-remove {
     color: #aaaaaa;
     font-size: 13px;
+    font-weight: 400;
     margin-left: 12px;
 }
+
 
 #UserHeader .item-remove:hover,
 #UserHeader .item-name:hover {
