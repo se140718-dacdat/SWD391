@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/constants.dart';
 import 'package:mobile/models/Product.dart';
+import 'package:mobile/screens/details/components/cart/add_to_cart_page.dart';
 import 'package:mobile/screens/details/components/product_price_name.dart';
 import 'package:mobile/screens/details/components/product_title_with_image.dart';
 
@@ -41,6 +42,7 @@ class Body extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         ProductPriceName(product: product),
+                        AddToCartPage(product: product),
                         Row(
                           children: <Widget>[
                             Padding(
@@ -54,8 +56,8 @@ class Body extends StatelessWidget {
                                 decoration: const BoxDecoration(
                                   shape: BoxShape.circle,
                                   image: DecorationImage(
-                                    image: NetworkImage(
-                                        "https://scontent.fsgn15-1.fna.fbcdn.net/v/t39.30808-6/289519586_3195193710724605_4600458332758181816_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=NkA8nBL3DkgAX8Fyvij&tn=-BWEPSkXPHbPHFuQ&_nc_ht=scontent.fsgn15-1.fna&oh=00_AT9u4GPj7RBLjd8dVKI5ru18qDVnp23aHJdslbEMLxuREA&oe=634C6A82"),
+                                    image:
+                                        AssetImage("assets/images/avtFB.jpg"),
                                   ),
                                 ),
                               ),

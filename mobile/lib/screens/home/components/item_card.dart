@@ -26,7 +26,7 @@ class ItemCard extends StatelessWidget {
                 color: Colors.green[100],
                 borderRadius: BorderRadius.circular(16),
               ),
-              child: Image.network(
+              child: Image.asset(
                 product.img,
                 // cacheHeight: 140,
               ),

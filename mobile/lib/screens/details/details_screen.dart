@@ -1,11 +1,16 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mobile/constants.dart';
 import 'package:mobile/models/Product.dart';
 import 'package:mobile/screens/details/components/body.dart';
+import 'package:mobile/screens/details/components/cart/cart_list/cart_list.dart';
+import 'package:mobile/screens/details/components/cart/controller/cart_controller.dart';
 
 class DetailsScreen extends StatelessWidget {
-  const DetailsScreen({super.key, required this.product});
+  DetailsScreen({super.key, required this.product});
   final Product product;
+  CartController cartController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,6 +19,14 @@ class DetailsScreen extends StatelessWidget {
       body: Body(
         product: product,
       ),
+      // bottomNavigationBar: BottomNavigationBar(
+      //   items: const <BottomNavigationBarItem>[
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.add_shopping_cart_outlined),
+      //     ),
+      //     // BottomNavigationBarItem()
+      //   ],
+      // ),
     );
   }
 
@@ -34,14 +47,30 @@ class DetailsScreen extends StatelessWidget {
           icon: const Icon(Icons.search),
           iconSize: 30,
         ),
-        IconButton(
-          onPressed: () {},
-          icon: const Icon(Icons.shopping_cart_outlined),
-          iconSize: 30,
+        const SizedBox(
+          width: kDefaultPaddin / 3,
+        ),
+        Badge(
+          badgeContent: Obx(
+            () => Text(
+              cartController.totalQty.value.toString(),
+            ),
+          ),
+          position: BadgePosition.topEnd(),
+          showBadge: true,
+          child: IconButton(
+            onPressed: () {
+              Get.to(() => CartList());
+            },
+            icon: const Icon(
+              Icons.favorite,
+            ),
+            iconSize: 30,
+          ),
         ),
         const SizedBox(
-          width: kDefaultPaddin / 2,
-        )
+          width: kDefaultPaddin / 3,
+        ),
       ],
     );
   }

@@ -21,7 +21,7 @@ class ProductTitleWithImage extends StatelessWidget {
           Row(
             children: <Widget>[
               Expanded(
-                child: Image.network(
+                child: Image.asset(
                   product.img,
                   fit: BoxFit.fitHeight,
                   width: size.width / 5,
