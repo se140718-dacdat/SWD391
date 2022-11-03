@@ -3,18 +3,24 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mobile/constants.dart';
 import 'package:mobile/constrain/controller.dart';
+import 'package:mobile/screens/home/home_screen.dart';
 import 'package:mobile/screens/login/login_screen.dart';
 import 'package:mobile/screens/user/footer_content.dart';
 import 'package:mobile/screens/user/profile_item/profile_item.dart';
 import 'package:mobile/screens/user/sp_solid_btn/sp_solid_btn.dart';
 
-class ProfileWithoutLogin extends StatelessWidget {
+class ProfileWithoutLogin extends StatefulWidget {
   const ProfileWithoutLogin({super.key});
+
+  @override
+  State<ProfileWithoutLogin> createState() => _ProfileWithoutLoginState();
+}
+
+class _ProfileWithoutLoginState extends State<ProfileWithoutLogin> {
+  double topContainerHeight = 190;
+  String img = loginController.user.value.avatarUrl.toString();
   @override
   Widget build(BuildContext context) {
-    const double topContainerHeight = 190;
-    String img = loginController.user.value.avatarUrl.toString();
-    print(img);
     return SafeArea(
       child: SingleChildScrollView(
         child: Column(
@@ -167,7 +173,14 @@ class ProfileWithoutLogin extends StatelessWidget {
                   ? SPSolidButton(
                       text: "Log Out",
                       minusWidth: 100,
-                      onPressed: (() {}),
+                      onPressed: (() {
+                        loginController.logout();
+                        Get.to(const HomeScreen());
+                        Get.off(const LoginPage());
+                        setState(() {
+                          img = "null";
+                        });
+                      }),
                     )
                   : const SizedBox(
                       height: 18,

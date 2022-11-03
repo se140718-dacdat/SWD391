@@ -10,10 +10,10 @@ class NetworkHandler {
   static Future<String> post(var body, String endPoint) async {
     var response = await client.post(buildUri(endPoint), body: body, headers: {
       "Accept": "application/json",
-      "content-type": "application/json"
+      "content-type": "application/json; charset=utf-8",
+      "access-control-allow-origin": "*",
     });
     debugPrint(response.body);
-    print(response.body);
     return response.body;
   }
 

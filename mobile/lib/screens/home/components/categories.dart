@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mobile/constants.dart';
+import 'package:mobile/constrain/controller.dart';
+import 'package:mobile/controller/category_controller.dart';
+import 'package:mobile/models/Category.dart';
 
 class Categories extends StatefulWidget {
   const Categories({super.key});
@@ -10,6 +14,7 @@ class Categories extends StatefulWidget {
 
 class _CategoriesState extends State<Categories> {
   List<String> categories = ["TV", "Tủ Lạnh", "Xe máy", "Bàn", "Ghế", "Xe máy"];
+
   int selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
@@ -19,7 +24,7 @@ class _CategoriesState extends State<Categories> {
         height: 25,
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
-          itemCount: categories.length,
+          itemCount: categoryController.listCates.length,
           itemBuilder: (context, index) => buildCategory(index),
         ),
       ),
@@ -39,7 +44,7 @@ class _CategoriesState extends State<Categories> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              categories[index],
+              categoryController.listCates.value[index].name.toString(),
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 color: selectedIndex == index ? kTextColor : kTextLightColor,

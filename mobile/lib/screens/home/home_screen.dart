@@ -6,9 +6,11 @@ import 'package:mobile/logo_page.dart';
 import 'package:mobile/screens/home/components/body.dart';
 import 'package:mobile/screens/login/login_screen.dart';
 import 'package:get/get.dart';
+import 'package:mobile/screens/post/post_screen.dart';
 import 'package:mobile/screens/user/profile_screen.dart';
 import 'package:mobile/screens/user/profile_screen_without_login.dart';
 import 'package:mobile/service/network_handler/network_handler.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -19,19 +21,22 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int currentPage = 0;
+  var isLogged = false;
   List<Widget> pages = [
     const Body(),
-    const LogoPage(),
+    const PostScreen(),
     const ProfileWithoutLogin(),
   ];
   @override
   void initState() {
+    checkLogin();
     super.initState();
   }
 
   void checkLogin() async {
-    String? token = await NetworkHandler.getToken();
-    print("token: $token");
+    final SharedPreferences preferences = await SharedPreferences.getInstance();
+    isLogged = preferences.getBool("isLoggedin")!;
+    debugPrint("isLogged:${isLogged}");
   }
 
   @override
@@ -41,28 +46,32 @@ class _HomeScreenState extends State<HomeScreen> {
       home: Scaffold(
         // appBar: buildAppBar(),
         body: pages[currentPage],
-        bottomNavigationBar: NavigationBar(
-          height: 50,
-          destinations: const [
-            NavigationDestination(
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: currentPage,
+          selectedItemColor: Colors.purple,
+          selectedIconTheme: IconThemeData(
+            size: 30,
+          ),
+          onTap: (value) {
+            this.setState(() {
+              this.currentPage = value;
+            });
+          },
+          iconSize: 24,
+          items: const [
+            BottomNavigationBarItem(
               icon: Icon(Icons.home),
               label: "Home",
             ),
-            NavigationDestination(
+            BottomNavigationBarItem(
               icon: Icon(Icons.control_point_outlined),
               label: "Post",
             ),
-            NavigationDestination(
+            BottomNavigationBarItem(
               icon: Icon(Icons.person),
               label: "User",
             ),
           ],
-          onDestinationSelected: (int index) {
-            setState(() {
-              currentPage = index;
-            });
-          },
-          selectedIndex: currentPage,
         ),
       ),
     );

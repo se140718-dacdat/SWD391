@@ -36,13 +36,11 @@ class _AddToCartPageState extends State<AddToCartPage> {
                 setState(() {
                   isChoose = true;
                 });
-                debugPrint(isChoose.toString());
               } else {
                 cartController.removeItemInCart(widget.product);
                 setState(() {
                   isChoose = false;
                 });
-                debugPrint(isChoose.toString());
               }
             },
             child: Container(

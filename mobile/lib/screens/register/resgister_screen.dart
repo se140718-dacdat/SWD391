@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:mobile/constants.dart';
+import 'package:mobile/constrain/controller.dart';
 import 'package:mobile/models/Account.dart';
+import 'package:mobile/screens/user/dropdown_btn/dropdown_btn.dart';
+import 'package:mobile/screens/user/gender_btn/gender_btn.dart';
 
 import '../login/controller/login_controller.dart';
 import 'controller/register_controller.dart';
@@ -15,8 +18,6 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  var registerController = Get.put(RegisterController());
-  TextEditingController pwd = TextEditingController();
   bool check = true;
   final _formKey = GlobalKey<FormState>();
 
@@ -87,7 +88,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         const SizedBox(
                           height: 20.0,
                         ),
-                        _buildUserNameTF(),
+                        _buildTFCustom("User name", "Input User Name",
+                            registerController.userName),
                         const SizedBox(
                           height: 20.0,
                         ),
@@ -99,7 +101,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         const SizedBox(
                           height: 20.0,
                         ),
+                        _buildTFCustom("Full Name", "Input Full Name",
+                            registerController.fullName),
+                        const SizedBox(
+                          height: 20.0,
+                        ),
+                        const GenderButton(),
+                        const SizedBox(
+                          height: 20.0,
+                        ),
+                        DropDownBuilding(),
+                        const SizedBox(
+                          height: 20.0,
+                        ),
                         _buildPhoneTF(),
+                        const SizedBox(
+                          height: 20.0,
+                        ),
                         _buildRegisterBTN(),
                       ],
                     ),
@@ -113,14 +131,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-  Widget _buildUserNameTF() {
+  Widget _buildTFCustom(
+      String name, String hintText, TextEditingController controller) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const Text(
-          "Username",
-          style: kLabelStyle,
-        ),
+        // Text(
+        //   name,
+        //   style: kLabelStyle,
+        // ),
         const SizedBox(
           height: 10.0,
         ),
@@ -129,30 +148,31 @@ class _RegisterScreenState extends State<RegisterScreen> {
           decoration: kBoxDecorationStyle,
           height: 60,
           child: TextFormField(
-            controller: registerController.userName,
+            controller: controller,
             // textInputAction: loginController.userName,
             keyboardType: TextInputType.text,
             style: const TextStyle(
-              color: Color.fromARGB(255, 30, 54, 141),
+              color: Colors.black,
               fontFamily: 'OpenSans',
             ),
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               border: InputBorder.none,
-              contentPadding: EdgeInsets.only(top: 14),
-              prefixIcon: Icon(
+              contentPadding: const EdgeInsets.only(top: 14),
+              prefixIcon: const Icon(
                 Icons.person,
                 color: Color.fromARGB(255, 42, 73, 187),
               ),
-              hintText: 'Enter your Username',
-              hintStyle: TextStyle(
-                color: Color.fromARGB(255, 110, 137, 235),
+              hintText: hintText,
+              hintStyle: const TextStyle(
+                color: Colors.black,
                 fontFamily: 'OpenSans',
               ),
             ),
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return 'Please enter your Username';
+                return hintText;
               }
+              return null;
             },
           ),
         ),
@@ -164,10 +184,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const Text(
-          "Password",
-          style: kLabelStyle,
-        ),
+        // const Text(
+        //   "Password",
+        //   style: kLabelStyle,
+        // ),
         const SizedBox(
           height: 10.0,
         ),
@@ -179,7 +199,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             controller: registerController.password,
             obscureText: true,
             style: const TextStyle(
-              color: Color.fromARGB(255, 30, 54, 141),
+              color: Colors.black,
               fontFamily: 'OpenSans',
             ),
             decoration: const InputDecoration(
@@ -191,7 +211,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
               hintText: 'Enter Password',
               hintStyle: TextStyle(
-                color: Color.fromARGB(255, 110, 137, 235),
+                color: Colors.black,
                 fontFamily: 'OpenSans',
               ),
             ),
@@ -211,10 +231,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const Text(
-          "Re-Password",
-          style: kLabelStyle,
-        ),
+        // const Text(
+        //   "Re-Password",
+        //   style: kLabelStyle,
+        // ),
         const SizedBox(
           height: 10.0,
         ),
@@ -226,7 +246,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             controller: registerController.rePassword,
             obscureText: true,
             style: const TextStyle(
-              color: Color.fromARGB(255, 30, 54, 141),
+              color: Colors.black,
               fontFamily: 'OpenSans',
             ),
             decoration: const InputDecoration(
@@ -238,7 +258,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
               hintText: 'Enter Re-Password',
               hintStyle: TextStyle(
-                color: Color.fromARGB(255, 110, 137, 235),
+                color: Colors.black,
                 fontFamily: 'OpenSans',
               ),
               // errorText: validationPwd(),
@@ -263,10 +283,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const Text(
-          "Phone",
-          style: kLabelStyle,
-        ),
+        // const Text(
+        //   "Phone",
+        //   style: kLabelStyle,
+        // ),
         const SizedBox(
           height: 10.0,
         ),
@@ -278,7 +298,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             controller: registerController.phone,
             keyboardType: TextInputType.phone,
             style: const TextStyle(
-              color: Color.fromARGB(255, 30, 54, 141),
+              color: Colors.black,
               fontFamily: 'OpenSans',
             ),
             decoration: const InputDecoration(
@@ -290,7 +310,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
               hintText: 'Enter your Phone Number',
               hintStyle: TextStyle(
-                color: Color.fromARGB(255, 110, 137, 235),
+                color: Colors.black,
                 fontFamily: 'OpenSans',
               ),
             ),
@@ -323,6 +343,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         ),
         onPressed: () {
           if (_formKey.currentState!.validate()) {
+            // debugPrint(registerController.buildingId.value.toString());
             registerController.register();
           }
         },

@@ -117,6 +117,7 @@ class CartList extends StatelessWidget {
                                                 cartController
                                                     .removeThisItemInCart(
                                                         currentItem);
+                                                cartController.totalQty.value--;
                                                 print("Delete Btn");
                                               },
                                               child: const Text('Delete')),

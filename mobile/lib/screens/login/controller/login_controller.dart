@@ -11,6 +11,7 @@ import 'package:mobile/screens/login/login_screen.dart';
 import 'package:mobile/screens/register/resgister_screen.dart';
 import 'package:mobile/screens/user/profile_screen.dart';
 import 'package:mobile/service/network_handler/network_handler.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginController extends GetxController {
   TextEditingController userName = TextEditingController();
@@ -36,13 +37,32 @@ class LoginController extends GetxController {
       Get.to(() => const LoginPage());
     }
     if (data['message'] == 'Success') {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setBool("isLoggedin", true);
       msg.value = data['message'];
       print(Account.fromMap(data["data"]));
       user.value = Account.fromMap(data["data"]);
+      prefs.setString("userId", user.value.id.toString());
+
       isLogin.value = true;
       Get.to(() => const HomeScreen());
     }
   }
 
-  void logout() async {}
+  Future<void> logout() async {
+    user.value.id = "";
+    user.value.fullName = "";
+    user.value.avatarUrl = "null";
+    user.value.description = "";
+    user.value.gender = "";
+    user.value.phone = "";
+    user.value.jwtToken = "";
+    user.value.role = "";
+
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    sharedPreferences.setBool("isLoggedin", false);
+    sharedPreferences.setString("userId", "");
+    isLogin.value = false;
+    Get.off(() => const HomeScreen());
+  }
 }
