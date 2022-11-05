@@ -59,6 +59,11 @@
     font-weight: bold;
 }
 
+#Main .item-title,
+#Main .item-name {
+    text-transform: capitalize;
+}
+
 #Main .item-name {
     font-size: 1.2rem;
     color: var(--black-color);

@@ -5,66 +5,78 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "./UserHeader.css";
 import { useDispatch, useSelector } from "react-redux";
 import { Nav, Navbar, OverlayTrigger, Tooltip, NavDropdown, Dropdown } from 'react-bootstrap';
-import { logoutUser } from '../../../../redux/apiRequest';
+import { clearCart, logoutUser } from '../../../../redux/apiRequest';
+import { cartItem, getTotal, Post, PostShow, Product } from '../../../../model';
+import { currencyMask, currencyMaskString } from '../../../../mask';
+
 const UserHeader: React.FC = props => {
     const user = useSelector((state: any) => state.auth.login.currentUser.data);
+    const cart = useSelector((state: any) => state.cart.cart.currentCart);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [show, setShow] = useState("display-none");
     const logout = () => {
         logoutUser(dispatch, navigate);
     }
+    const [showCart, isShowCart] = useState("display-none");
+
+    useEffect(() => {
+        if (cart?.length > 0) {
+            isShowCart("");
+        } else {
+            isShowCart("display-none");
+        }
+    });
+
 
     const renderNotification = (name: string) => {
-        return (
-            <div className="notification-body">
-                <ul className="cart-body">
-                    <li className="cart-item-wrap">
-                        <a href="" className="cart-item">
-                            <img src="https://cdn.shopify.com/s/files/1/0814/0539/products/p191213_Barrel_46_Whiskey_Espresso_1123_1080px_600x.jpg?v=1666056574" style = {{width: "36px", height: "36px"}} alt="" className="item-img" />
-                            <span className="item-name">Rosewood Watch</span>
-                        </a>
-                        <div>
-                            <span className="item-quantity">1 × $165.00</span>
-                            <a href="" className="item-remove fs-16">×</a>
-                        </div>
-                    </li>
-                    <li className="cart-item-wrap">
-                        <a href="" className="cart-item">
-                            <img src="https://cdn.shopify.com/s/files/1/0814/0539/products/p191213_Barrel_46_Whiskey_Espresso_1123_1080px_600x.jpg?v=1666056574" style = {{width: "36px", height: "36px"}} alt="" className="item-img" />
-                            <span className="item-name">Rosewood Watch</span>
-                        </a>
-                        <div>
-                            <span className="item-quantity">1 × $165.00</span>
-                            <a href="" className="item-remove">x</a>
-                        </div>
-                    </li>
-                    <li className="cart-item-wrap">
-                        <a href="" className="cart-item">
-                            <img src="https://cdn.shopify.com/s/files/1/0814/0539/products/p191213_Barrel_46_Whiskey_Espresso_1123_1080px_600x.jpg?v=1666056574" style = {{width: "36px", height: "36px"}} alt="" className="item-img" />
-                            <span className="item-name">Rosewood Watch</span>
-                        </a>
-                        <div>
-                            <span className="item-quantity">1 × $165.00</span>
-                            <a href="" className="item-remove">x</a>
-                        </div>
-                    </li>
-                </ul>
-                <div className="cart-footer">
-                    <div className='total'><strong>Total: </strong>$1725000</div>
-                    <button className="btn-checkout btn-primary-color">Checkout</button>
+        if (name == "Cart") {
+            return (
+                <div className="notification-body">
+                    <ul className="cart-body">
+                        {
+                            cart?.map((item: cartItem, index: number) => {
+                                return (
+                                    <li key={index} className="cart-item-wrap">
+                                        <a href="" className="cart-item">
+                                            <img src={item?.post.imageUrl} style={{ width: "36px", height: "36px" }} alt="" className="item-img" />
+                                            <span className="item-name">{item?.post.product.name}</span>
+                                        </a>
+                                        <div>
+                                            <span className="item-quantity">{`${item?.quantity} × $${currencyMaskString(item?.post.product.price)}`}</span>
+                                            <a href="" className="item-remove fs-16">×</a>
+                                        </div>
+                                    </li>
+                                )
+                            })
+                        }
+                    </ul>
+                    <div className="cart-footer">
+                        <div className='total'><strong>Total: </strong>{`$${currencyMaskString(getTotal(cart))}`}</div>
+                        <button className="btn-checkout btn-primary-color" 
+                        onClick={
+                            ()=>{
+                                navigate("/cart")
+                            }
+                        }
+                        >Checkout</button>
+                    </div>
                 </div>
-            </div>
-        )
+            )
+        }
+        else {
+            return (
+                <div></div>
+            )
+        }
     }
 
     const showModal = (name: string) => {
         const element = document.getElementsByClassName(name)[0].classList;
         if (element.contains('display')) {
             element.remove('display');
-            console.log(`element: ${element}`);
         } else {
             element.add('display');
-            console.log(`element: ${element}`);
         }
     }
 
@@ -89,13 +101,14 @@ const UserHeader: React.FC = props => {
             redirect: "/cart"
         }
     ]
-    const [show, setShow] = useState("display-none");
 
     const renderTooltip = (props: String) => (
         <Tooltip id="button-tooltip" {...props}>
             {props}
         </Tooltip>
     );
+
+
     return (
         <div id="UserHeader">
             <Navbar className="header-navbar" collapseOnSelect expand="lg" bg="light" variant="light">
@@ -103,8 +116,9 @@ const UserHeader: React.FC = props => {
                     <Navbar.Brand href="#home"><img className="vin-icon" src="/images/vin-icon.jpg"></img></Navbar.Brand>
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">
-                            <Nav.Link href="/">Home</Nav.Link>
-                            <Nav.Link href="/create-post">Post</Nav.Link>
+                            <Nav.Link className='link' href="/">Home</Nav.Link>
+                            <Nav.Link className='link' href="/create-post">Post</Nav.Link>
+                            <Nav.Link className='link' href="/store">Store</Nav.Link>
                         </Nav>
                         <Nav className="search">
                             <i className="pi pi-search"></i>
@@ -128,6 +142,7 @@ const UserHeader: React.FC = props => {
                                             </div>
                                             {renderNotification(item.name)}
                                         </div>
+                                        <div className={`cart-length ${item.link} ${showCart}`}>{cart?.length}</div>
                                     </Nav>
                                 )
                             })
@@ -148,7 +163,7 @@ const UserHeader: React.FC = props => {
                                         <span className='user-info-email'>{user.description}</span>
                                     </div>
                                 </div>
-                                <button className="btn-logout" onClick={() => { logout() }}>Logout</button>
+                                <button className="btn-logout btn-primary-color" onClick={() => { logout() }}>Logout</button>
                             </div>
                         </Nav>
                     </Navbar.Collapse>

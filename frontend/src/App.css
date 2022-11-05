@@ -66,7 +66,11 @@
 }
 
 .inline-block * {
-    display: inline-block;
+    display: inline-block !important;
+}
+
+.inline {
+    display: inline;
 }
 
 .block * {
@@ -99,4 +103,21 @@
 
 .fs-16 {
     font-size: 16px !important;
+}
+
+.btn-primary-oposite {
+    font-size: 1.2rem;
+    color: var(--primary-button);
+    text-align: center;
+    border-radius: 5px;
+    padding: 4px 8px;
+    border-color: var(--primary-button);
+    background-color: var(--white-color);
+    margin-top: 12px;
+    margin-right: 12px;
+}
+
+.btn-primary-oposite:hover {
+    color: var(--white-color);
+    background-color: var(--primary-button-hover);
 }

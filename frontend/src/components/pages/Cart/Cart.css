@@ -77,6 +77,15 @@
 #Cart .btn-checkout {
     padding: 9px 28px;
     border-radius: 6px;
+    box-shadow: 0 3px 3px 0 rgba(32, 40, 49, 0.5);
+}
+
+#Cart .btn-clear-cart {
+    padding: 9px 28px;
+    border-radius: 6px;
+    border: none;
+    box-shadow: 0 3px 3px 0 rgba(32, 40, 49, 0.5);
+    float: left;
 }
 
 #Cart .total {

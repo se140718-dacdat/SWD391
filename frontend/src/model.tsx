@@ -2,7 +2,7 @@ export enum Roles {
     Admin = 1,
     User = 2
 }
-
+ 
 export interface Post {
     title: string,
     postDescription: string,
@@ -13,7 +13,7 @@ export interface Post {
     productName: string,
     productDescription: string,
     quantity: Number,
-    categoryId: string
+    categoryId: string,
 }
 
 export interface Category {
@@ -27,7 +27,7 @@ export interface Product {
     name: string,
     price: Number,
     description: string,
-    quantity: Number,
+    quantity: number,
     dimensions: string,
     categoryId: string,
 }
@@ -45,7 +45,55 @@ export interface PostShow {
     description: string,
     id: string,
     imageUrl: string,
-    price: Number,
+    price: number,
     product: Product,
     title: string
+}
+
+export interface ProductCheckout {
+    id: string;
+    total: number;
+    quantity: number;
+    price: number;
+}
+
+export interface cartItem {
+    post: PostShow;
+    quantity: number;
+}
+
+export const getTotal = (cart: cartItem[]) => {
+    let total = 0;
+    cart?.forEach(item => {
+        total+=item.quantity*item.post.price;
+    });
+    return total;
+}
+
+export const getProducts = (cart: cartItem[]) => {
+    let products: ProductCheckout[] = [];
+    cart?.forEach(item => {
+        products.push({
+            id: item.post.id,
+            total: item.post.price*item.quantity,
+            quantity: item.quantity,
+            price: item.post.price
+        })
+    });
+    return products;
+}
+
+export interface cartList {
+    id: string,
+    total: number,
+    quantity: number,
+    price: number
+}
+
+export interface checkoutForm {
+    accountId: string;
+    walletId: string;
+    description: string;
+    transactionType: string;
+    cartList: cartList[];
 }

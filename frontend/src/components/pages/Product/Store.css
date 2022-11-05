@@ -1,0 +1,31 @@
+#Main .user-info {
+    display: flex;
+    flex-wrap: nowrap;
+    width: 100%;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    padding: 16px;
+    margin-bottom: 24px;
+    align-items: flex-end;
+}
+
+#Main .user-info-avt {
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    width: 130px;
+    height: 130px;
+}
+
+#Main .user-wrap {
+    width: 70%;
+    margin-left: 24px;
+}
+
+#Main .user-wrap * {
+    display: block;
+}
+
+#Main .user-info-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+}

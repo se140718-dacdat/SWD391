@@ -11,7 +11,7 @@ const Menu: React.FC = props => {
     }, []);
 
     async function fetchData() {
-        const response = await fetch("https://localhost:5001/api/categories");
+        const response = await fetch("http://nguyenxuanthuan-001-site1.htempurl.com/api/categories");
         const data = await response.json();
         setCategories(data.data.sort());
     }

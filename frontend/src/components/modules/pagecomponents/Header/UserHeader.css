@@ -5,6 +5,10 @@
     z-index: 12;
 }
 
+#UserHeader .link {
+    margin: 0 15px;
+}
+
 #UserHeader .vin-icon {
     width: 90px;
     padding-right: 24px;
@@ -13,6 +17,11 @@
 #UserHeader .navbar-collapse {
     font-weight: bold;
     font-size: 18px
+}
+
+#UserHeader .btn-logout {
+    border-radius: 10px;
+    float: right;
 }
 
 /* NOTIFICATION  */
@@ -175,6 +184,17 @@
     position: relative;
     cursor: pointer;
     margin: 0 12px;
+}
+
+#UserHeader .cart-length {
+    padding: 1px 6px;
+    font-size: 9px;
+    border-radius: 50px;
+    color: var(--white-color);
+    position: absolute;
+    background-color: var(--primary-color);
+    left: 15px;
+    bottom: 7px;
 }
 
 #UserHeader .user-option {
