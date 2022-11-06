@@ -1,27 +1,37 @@
-import { Form } from "react-bootstrap";
+import { Form, Pagination } from "react-bootstrap";
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import "./Main.css";
 import "./Store.css";
-import { Category, PostShow } from "../../../model";
+import { PostShow } from "../../../model";
 import { currencyMaskString } from "../../../mask";
 import { getPost } from "../../../redux/apiRequest";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
+
 
 const Store = () => {
     const user = useSelector((state: any) => state.auth.login.currentUser.data);
     const [posts, setPosts] = useState<PostShow[]>([]);
+    const [allPosts, setAllPosts] = useState<PostShow[]>([]);
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const [page, setPage] = useState<number>(1);
     useEffect(() => {
         fetchData();
-    }, []);
+    }, [page]);
     const redirectProduct = (post: PostShow) => {
         getPost(post, dispatch, navigate);
     }
     async function fetchData() {
         try {
+            const res = await fetch(`http://nguyenxuanthuan-001-site1.htempurl.com/api/posts/accounts?id=${user?.id}&page=${page}&pageSize=5`, {
+                headers: {
+                    Authorization: `Bearer ${user?.jwtToken}`,
+                    'Content-Type': 'application/json'
+                },
+            });
+            const resData = await res.json();
+            setPosts(resData.data);
             const response = await fetch(`http://nguyenxuanthuan-001-site1.htempurl.com/api/posts/accounts?id=${user?.id}`, {
                 headers: {
                     Authorization: `Bearer ${user?.jwtToken}`,
@@ -29,13 +39,12 @@ const Store = () => {
                 },
             });
             const data = await response.json();
-            setPosts(data.data);
-            console.log(`posts: ${posts}`);
+            setAllPosts(data.data);
         } catch (error) {
             return error;
         }
     }
-    async function removePost (id: string) {
+    async function removePost(id: string) {
         try {
             const response = await fetch(`http://nguyenxuanthuan-001-site1.htempurl.com/api/posts/${id}`, {
                 method: 'DELETE',
@@ -44,10 +53,27 @@ const Store = () => {
                     'Content-Type': 'application/json'
                 },
             });
-            console.log(`posts: ${id}`);
+            console.log(response);
         } catch (error) {
             console.log(error);
         }
+    }
+
+    const Paging = (lenght: number) => {
+        let items: any = [];
+        for (let number = 1; number <= lenght % 5; number++) {
+            items.push(
+                <Pagination.Item onClick={() => { setPage(number) }} key={number} active={number === page}>
+                    {number}
+                </Pagination.Item>
+            );
+        }
+        return (
+            <div className="page">
+                <Pagination>{items}</Pagination>
+                <br />
+            </div>
+        )
     }
     return (
         <div id="Main" className="right-side">
@@ -75,7 +101,7 @@ const Store = () => {
                 {
                     posts?.map((item, index) => {
                         return (
-                            <li key={index} className="item clearfix" 
+                            <li key={index} className="item clearfix"
                             // onClick={() => { redirectProduct(item) }}
                             >
                                 <div className="item-img">
@@ -86,13 +112,17 @@ const Store = () => {
                                     <h2 className="item-name">{item.product.name}</h2>
                                     <span className="item-price">{`${currencyMaskString(item.price)} đ`}</span>
                                     <span className="item-store">{`${item.building?.name}-${item.building?.address}`}</span>
-                                    <button className="product-remove" onClick={()=>{removePost(item.id)}}><div className="btn-remove">×</div></button>
+                                </div>
+                                <div className="product-remove">
+                                    <div className="btn-remove" onClick={() => { removePost(item.id) }}>×</div>
                                 </div>
                             </li>
                         );
                     })
                 }
             </ul>
+            {Paging(Math.ceil(allPosts.length / 5))}
+
         </div>
     );
 }

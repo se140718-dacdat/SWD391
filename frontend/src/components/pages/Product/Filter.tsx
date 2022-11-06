@@ -1,4 +1,4 @@
-import { Form } from "react-bootstrap";
+import { Form, Pagination } from "react-bootstrap";
 import { useEffect, useState } from 'react'
 import { useDispatch} from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
@@ -10,6 +10,8 @@ import { currencyMaskString } from "../../../mask";
 const Filter = () => {
     const params = useParams();
     const [posts, setPosts] = useState<PostShow[]>([]);
+    const [allPosts, setAllPosts] = useState<PostShow[]>([]);
+    const [page, setPage] = useState<number>(1);
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [category, setCategory] = useState<Category>({
@@ -22,12 +24,32 @@ const Filter = () => {
     }, []);
 
     async function fetchData() {
-        const response = await fetch(`http://nguyenxuanthuan-001-site1.htempurl.com/api/posts/catecories?id=${params.id}`);
+        const response = await fetch(`http://nguyenxuanthuan-001-site1.htempurl.com/api/posts/catecories?id=${params.id}&page=${page}&pageSize=5`);
         const data = await response.json();
         setPosts(data.data);
-        const res = await fetch(`http://nguyenxuanthuan-001-site1.htempurl.com/api/categories/${params.id}`);
-        const dataRes = await res.json();
-        setCategory(dataRes.data);
+        const res = await fetch(`http://nguyenxuanthuan-001-site1.htempurl.com/api/posts/catecories?id=${params.id}`);
+        const resData = await res.json();
+        setAllPosts(resData.data);
+        const resCategory = await fetch(`http://nguyenxuanthuan-001-site1.htempurl.com/api/categories/${params.id}`);
+        const dataCategory = await resCategory.json();
+        setCategory(dataCategory.data);
+    }
+
+    const Paging = (lenght: number) => {
+        let items: any = [];
+        for (let number = 1; number <= lenght % 5; number++) {
+            items.push(
+                <Pagination.Item onClick={() => { setPage(number) }} key={number} active={number === page}>
+                    {number}
+                </Pagination.Item>
+            );
+        }
+        return (
+            <div className="page">
+                <Pagination>{items}</Pagination>
+                <br />
+            </div>
+        )
     }
 
     const redirectProduct = (post: PostShow) => {
@@ -63,6 +85,7 @@ const Filter = () => {
                     })
                 }
             </ul>
+            {Paging(Math.ceil(allPosts.length / 5))}
         </div>
     );
 }

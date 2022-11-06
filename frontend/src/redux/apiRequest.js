@@ -42,6 +42,7 @@ export const logoutUser = async (dispatch, navigate) => {
     dispatch(logoutStart());
     try {
         dispatch(logoutSuccess());
+        dispatch(clearCart());
         navigate("/");
     } catch (err) {
         dispatch(logoutFailed());

@@ -29,3 +29,18 @@
     font-size: 1.5rem;
     font-weight: bold;
 }
+
+#Main .product-remove {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    right: 0;
+    height: 100%;
+    margin-right: 12px;
+}
+
+
+#Main .item {
+    position: relative;
+}

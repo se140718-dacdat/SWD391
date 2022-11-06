@@ -121,3 +121,30 @@
     color: var(--white-color);
     background-color: var(--primary-button-hover);
 }
+
+#App .active * {
+    background-color: var(--primary-button) !important;
+    border-color: var(--primary-button) !important;
+}
+
+.page {
+    display: flex;
+    justify-content: center;
+}
+
+.btn-remove {
+    font-weight: 100;
+    height: 1em;
+    width: 1em;
+    font-size: 25.2px;
+    color: #aaa;
+    text-align: center;
+    border-radius: 50px;
+    line-height: 20px;
+}
+
+.btn-remove:hover {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    cursor: pointer;
+}

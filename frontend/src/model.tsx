@@ -1,8 +1,11 @@
+import Pagination from 'react-bootstrap/Pagination';
+
+
 export enum Roles {
     Admin = 1,
     User = 2
 }
- 
+
 export interface Post {
     title: string,
     postDescription: string,
@@ -65,7 +68,7 @@ export interface cartItem {
 export const getTotal = (cart: cartItem[]) => {
     let total = 0;
     cart?.forEach(item => {
-        total+=item.quantity*item.post.price;
+        total += item.quantity * item.post.price;
     });
     return total;
 }
@@ -75,7 +78,7 @@ export const getProducts = (cart: cartItem[]) => {
     cart?.forEach(item => {
         products.push({
             id: item.post.id,
-            total: item.post.price*item.quantity,
+            total: item.post.price * item.quantity,
             quantity: item.quantity,
             price: item.post.price
         })
