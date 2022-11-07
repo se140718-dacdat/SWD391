@@ -1,6 +1,10 @@
+import 'package:mobile/controller/account_controller.dart';
 import 'package:mobile/controller/building_controller.dart';
 import 'package:mobile/controller/category_controller.dart';
+import 'package:mobile/controller/checkout_controller.dart';
+import 'package:mobile/controller/order_controller.dart';
 import 'package:mobile/controller/product_controller.dart';
+import 'package:mobile/screens/details/components/cart/controller/cart_controller.dart';
 import 'package:mobile/screens/login/controller/login_controller.dart';
 import 'package:mobile/screens/post/controller/post_controller.dart';
 import 'package:mobile/screens/register/controller/register_controller.dart';
@@ -11,3 +15,7 @@ RegisterController registerController = RegisterController.instance;
 BuildingController buildingController = BuildingController.instance;
 PostController postController = PostController.instance;
 ProductController productController = ProductController.instance;
+CartController cartController = CartController.instance;
+AccountController accountController = AccountController.instance;
+OrderController orderController = OrderController.instance;
+CheckOutController checkOutController = CheckOutController.instance;

@@ -217,7 +217,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ),
             validator: (value) {
               if (value == null || value.isEmpty) {
-                debugPrint(value);
                 return 'Please enter some text';
               }
             },

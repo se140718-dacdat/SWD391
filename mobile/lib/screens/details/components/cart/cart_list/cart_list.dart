@@ -1,14 +1,17 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:mobile/constants.dart';
+import 'package:mobile/constrain/controller.dart';
+import 'package:mobile/screens/checkout/checkout.dart';
 import 'package:mobile/screens/details/components/cart/cart_list/cast_list_background.dart';
 import 'package:mobile/screens/details/components/cart/controller/cart_controller.dart';
 import 'package:mobile/screens/home/home_screen.dart';
+import 'package:mobile/screens/user/sp_solid_btn/sp_solid_btn.dart';
 
 class CartList extends StatelessWidget {
   CartList({super.key});
-  CartController cartController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -21,21 +24,21 @@ class CartList extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
+                      const Text(
                         "Nothing in Cart",
                         style: TextStyle(
                           fontSize: 30,
                           fontWeight: FontWeight.w700,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       ElevatedButton(
                         onPressed: () {
-                          Get.to(() => HomeScreen());
+                          Get.to(() => const HomeScreen());
                         },
-                        child: Text('Back to Home Page'),
+                        child: const Text('Back to Home Page'),
                       )
                     ],
                   ),
@@ -46,30 +49,18 @@ class CartList extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Padding(
-                        padding: EdgeInsets.all(8),
+                        padding: const EdgeInsets.all(8),
                         child: Obx(
                           () => ListView.builder(
                             itemCount: cartController.cartItems.length,
                             itemBuilder: (context, index) {
                               var currentItem = cartController.cartItems[index];
                               return Card(
-                                clipBehavior: Clip.none,
+                                // clipBehavior: Clip.none,
                                 color: Colors.indigo[300],
                                 child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    Expanded(
-                                      flex: 1,
-                                      child: Text(
-                                        (index + 1).toString(),
-                                        style: const TextStyle(
-                                          color: kWhiteColor,
-                                          fontSize: 20,
-                                        ),
-                                      ),
-                                    ),
                                     Expanded(
                                       flex: 2,
                                       child: Padding(
@@ -77,8 +68,8 @@ class CartList extends StatelessWidget {
                                           top: 5,
                                           bottom: 5,
                                         ),
-                                        child: Image.asset(
-                                          currentItem.product.img,
+                                        child: Image.network(
+                                          currentItem.post.imageUrl.toString(),
                                           width: 100,
                                           height: 100,
                                         ),
@@ -88,29 +79,37 @@ class CartList extends StatelessWidget {
                                       flex: 2,
                                       child: Column(
                                         crossAxisAlignment:
-                                            CrossAxisAlignment.center,
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
                                         children: [
                                           Padding(
                                             padding: const EdgeInsets.only(
-                                              top: 10,
-                                              bottom: 20,
+                                              top: 8,
+                                              bottom: 8,
                                             ),
-                                            child: Text(
-                                              currentItem.product.name,
+                                            child: AutoSizeText(
+                                              currentItem.post.product!.name
+                                                  .toString(),
+                                              maxLines: 2,
                                               style: const TextStyle(
                                                 fontWeight: FontWeight.bold,
-                                                fontSize: 25,
+                                                fontSize: 30,
                                               ),
                                             ),
                                           ),
-                                          Text(currentItem.product.price
-                                              .toString()),
+                                          Text(
+                                              "${NumberFormat('###,###,###').format(currentItem.post.price!)} VND"),
                                         ],
                                       ),
                                     ),
                                     Expanded(
                                       flex: 2,
                                       child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
                                         children: [
                                           ElevatedButton(
                                               onPressed: () {
@@ -118,13 +117,8 @@ class CartList extends StatelessWidget {
                                                     .removeThisItemInCart(
                                                         currentItem);
                                                 cartController.totalQty.value--;
-                                                print("Delete Btn");
                                               },
                                               child: const Text('Delete')),
-                                          // ElevatedButton(
-                                          //   onPressed: () {},
-                                          //   child: const Text('Update'),
-                                          // ),
                                         ],
                                       ),
                                     ),
@@ -144,8 +138,8 @@ class CartList extends StatelessWidget {
                       ),
                       child: Container(
                         // color: Colors.red[400],
-                        padding: EdgeInsets.only(
-                          bottom: 5,
+                        padding: const EdgeInsets.only(
+                          bottom: 10,
                           left: 10,
                           right: 10,
                         ),
@@ -154,7 +148,7 @@ class CartList extends StatelessWidget {
                           children: [
                             Obx(
                               () => AutoSizeText(
-                                "Total amount: \$ ${cartController.totalAmount.toString()}",
+                                "Total amount: \$ ${cartController.totalAmount}",
                                 style: TextStyle(
                                   color: Colors.red[400],
                                   fontSize: 30,
@@ -166,6 +160,30 @@ class CartList extends StatelessWidget {
                               ),
                             ),
                           ],
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.red[900]),
+                        ),
+                        onPressed: () {
+                          Get.to(() => const CheckOut());
+                        },
+                        child: Container(
+                          width: MediaQuery.of(context).size.width / 1.2,
+                          height: 45,
+                          child: const Center(
+                              child: Text(
+                            "Check Out",
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )),
                         ),
                       ),
                     ),

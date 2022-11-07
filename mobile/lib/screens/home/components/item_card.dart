@@ -1,18 +1,22 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile/constants.dart';
+import 'package:mobile/models/Post.dart';
 import 'package:mobile/models/Product.dart';
+import 'package:intl/intl.dart';
 
 class ItemCard extends StatelessWidget {
-  final Product product;
+  final Post post;
   final VoidCallback press;
   const ItemCard({
     Key? key,
-    required this.product,
+    required this.post,
     required this.press,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    // var fomatterNum = NumberFormat('###,###,###');
     return GestureDetector(
       onTap: press,
       child: Column(
@@ -26,8 +30,8 @@ class ItemCard extends StatelessWidget {
                 color: Colors.green[100],
                 borderRadius: BorderRadius.circular(16),
               ),
-              child: Image.asset(
-                product.img,
+              child: Image.network(
+                post.imageUrl.toString(),
                 // cacheHeight: 140,
               ),
             ),
@@ -44,47 +48,52 @@ class ItemCard extends StatelessWidget {
                         top: 5,
                         bottom: 5,
                       ),
-                      child: Text(
-                        product.name,
+                      child: AutoSizeText(
+                        post.product!.name.toString(),
+                        maxLines: 1,
                         style: const TextStyle(
                             color: kTextColor,
                             fontSize: 18,
                             fontWeight: FontWeight.bold),
                       ),
                     ),
-                    Text(
-                      // product.price.toString()
-                      "\$${product.price}",
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 17,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 2),
+                      child: Text(
+                        // post.price.toString()
+                        "${NumberFormat('###,###,###').format(post.price!)} VND",
+
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 17,
+                        ),
                       ),
                     ),
                   ],
                 ),
               ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: const [
-                  Padding(
-                    padding: EdgeInsets.only(
-                      top: 5,
-                      bottom: 10,
-                    ),
-                    child: Text(
-                      "S302",
-                      style: TextStyle(color: kTextColor, fontSize: 18),
-                    ),
-                  ),
-                ],
-              )
+              // Column(
+              //   mainAxisAlignment: MainAxisAlignment.end,
+              //   crossAxisAlignment: CrossAxisAlignment.end,
+              //   children: [
+              //     Padding(
+              //       padding: EdgeInsets.only(
+              //         top: 5,
+              //         bottom: 10,
+              //       ),
+              //       child: Text(
+              //         post.building!.name.toString(),
+              //         style: TextStyle(color: kTextColor, fontSize: 18),
+              //       ),
+              //     ),
+              //   ],
+              // )
             ],
           ),
           Column(
-            children: const [
+            children: [
               Text(
-                "Posted 12:20AM",
+                "Post at ${post.createAt!.hour.toString().padLeft(2, '0')}:${post.createAt!.minute.toString().padLeft(2, '0')}  ",
                 style: TextStyle(
                   color: kTextLightColor,
                   fontWeight: FontWeight.bold,

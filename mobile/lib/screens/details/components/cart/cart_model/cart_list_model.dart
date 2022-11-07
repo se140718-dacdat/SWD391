@@ -1,35 +1,36 @@
 import 'dart:convert';
 
+import 'package:mobile/models/Post.dart';
 import 'package:mobile/models/Product.dart';
 
 class CartItemListModel {
-  late final Product product;
+  late final Post post;
   late final int qty;
 
   CartItemListModel({
-    required this.product,
+    required this.post,
     required this.qty,
   });
   CartItemListModel copyWith({
-    Product? product,
+    Post? post,
     int? qty,
   }) {
     return CartItemListModel(
-      product: product ?? this.product,
+      post: post ?? this.post,
       qty: qty ?? this.qty,
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
-      'product': product.toMap(),
+      'post': post.toJson(),
       'qty': qty,
     };
   }
 
   factory CartItemListModel.fromMap(Map<String, dynamic> map) {
     return CartItemListModel(
-      product: Product.fromMap(map['product']),
+      post: Post.fromJson(map['post']),
       qty: map['qty']?.toInt() ?? 0,
     );
   }
@@ -40,17 +41,15 @@ class CartItemListModel {
       CartItemListModel.fromMap(json.decode(source));
 
   @override
-  String toString() => 'CartItemListModel(product: $product, qty: $qty)';
+  String toString() => 'CartItemListModel(post: $post, qty: $qty)';
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is CartItemListModel &&
-        other.product == product &&
-        other.qty == qty;
+    return other is CartItemListModel && other.post == post && other.qty == qty;
   }
 
   @override
-  int get hashCode => product.hashCode ^ qty.hashCode;
+  int get hashCode => post.hashCode ^ qty.hashCode;
 }

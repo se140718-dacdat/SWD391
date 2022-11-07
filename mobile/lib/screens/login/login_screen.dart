@@ -27,19 +27,18 @@ class _LoginPageState extends State<LoginPage> {
     return Form(
       key: _formKey,
       child: Scaffold(
-        // appBar: AppBar(
-        //   leading: Container(
-        //     child: InkWell(
-        //       onTap: Get.back(),
-        //       child: Icon(
-        //         Icons.arrow_back,
-        //         size: 24,
-        //         color: Colors.black,
-
-        //       ),
-        //     ),
-        //   ),
-        // ),
+        appBar: AppBar(
+          leading: Container(
+            child: InkWell(
+              onTap: () => Get.back(),
+              child: Icon(
+                Icons.arrow_back,
+                size: 24,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ),
         body: AnnotatedRegion<SystemUiOverlayStyle>(
           value: SystemUiOverlayStyle.light,
           child: GestureDetector(
@@ -53,17 +52,6 @@ class _LoginPageState extends State<LoginPage> {
                     image: DecorationImage(
                       image: AssetImage('assets/images/logoVH.png'),
                       opacity: 0.1,
-                    ),
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        Color.fromARGB(255, 152, 243, 193),
-                        Color.fromARGB(255, 132, 231, 177),
-                        Color.fromARGB(255, 124, 236, 175),
-                        Color.fromARGB(255, 138, 243, 185),
-                      ],
-                      stops: [0.1, 0.4, 0.7, 0.9],
                     ),
                   ),
                 ),
@@ -147,15 +135,20 @@ class _LoginPageState extends State<LoginPage> {
       child: Row(
         children: <Widget>[
           Theme(
-            data: ThemeData(unselectedWidgetColor: Colors.white),
+            data: ThemeData(unselectedWidgetColor: Colors.black),
             child: Checkbox(
-              value: _rememberMe,
+              value: loginController.rememberMe.value,
               checkColor: Colors.white,
-              activeColor: const Color.fromRGBO(22, 43, 117, 1),
+              activeColor: Colors.black,
               onChanged: ((value) {
                 setState(() {
                   _rememberMe = value;
                 });
+                if (value == true) {
+                  loginController.rememberMe.value = true;
+                } else {
+                  loginController.rememberMe.value = false;
+                }
               }),
             ),
           ),
@@ -284,9 +277,17 @@ class _LoginPageState extends State<LoginPage> {
             ),
             validator: (value) {
               if (value == null || value.isEmpty) {
-                debugPrint(loginController.msg.toString());
+                debugPrint(loginController.msg.value.toString());
                 return "Please enter password!!!";
               }
+              // if (loginController.msg.value.toString() ==
+              //     "Username Or Password wrong!!") {
+              //   return "Username Or Password wrong!!";
+              // }
+
+              // else {
+              //   return "Username Or Password wrong!!";
+              // }
               // if (loginController.msg.toString() ==
               //     "Username Or Password wrong!!") {
               //   return "Username Or Password wrong!!";

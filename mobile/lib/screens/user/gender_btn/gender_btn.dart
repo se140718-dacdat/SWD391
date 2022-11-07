@@ -33,7 +33,7 @@ class _GenderButtonState extends State<GenderButton> {
                   isFemale = true;
                   isMale = false;
                 });
-                debugPrint(buildingController.listBuilDing.value.toString());
+                // debugPrint(buildingController.listBuilDing.value.toString());
               },
               child: Container(
                 color: isFemale == true ? Colors.red : Colors.white,

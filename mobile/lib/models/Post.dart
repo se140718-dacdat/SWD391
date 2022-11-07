@@ -5,7 +5,7 @@
 import 'dart:convert';
 
 import 'package:mobile/models/Building.dart';
-import 'package:mobile/models/Product.dart';
+import 'package:mobile/models/ProductPost.dart';
 
 Post postFromJson(String str) => Post.fromJson(json.decode(str));
 
@@ -31,12 +31,12 @@ class Post {
   String? description;
   String? imageUrl;
   String? accountId;
-  int? price;
+  double? price;
   DateTime? createAt;
   String? buildingId;
   dynamic lastUpdateAt;
   Building? building;
-  Product? product;
+  ProductPost? product;
 
   factory Post.fromJson(Map<String, dynamic> json) => Post(
         id: json["id"],
@@ -49,7 +49,7 @@ class Post {
         buildingId: json["buildingId"],
         lastUpdateAt: json["lastUpdateAt"],
         building: Building.fromJson(json["building"]),
-        product: Product.fromJson(json["product"]),
+        product: ProductPost.fromJson(json["product"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -59,10 +59,14 @@ class Post {
         "imageUrl": imageUrl,
         "accountId": accountId,
         "price": price,
-        "createAt": createAt!.toIso8601String(),
+        "createAt": createAt?.toIso8601String(),
         "buildingId": buildingId,
         "lastUpdateAt": lastUpdateAt,
         "building": building!.toJson(),
         "product": product!.toJson(),
       };
+  @override
+  String toString() {
+    return 'Post(id: $id, title: $title, description: $description, imageUrl: $imageUrl, accountId: $accountId, price: $price, createAt: $createAt, buildingId: $buildingId, lastUpdateAt: $lastUpdateAt, building: $building, product: $product)';
+  }
 }

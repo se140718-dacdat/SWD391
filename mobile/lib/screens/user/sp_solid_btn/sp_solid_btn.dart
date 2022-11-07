@@ -15,11 +15,12 @@ class SPSolidButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ButtonStyle(
-          elevation: MaterialStateProperty.all(0),
-          backgroundColor: MaterialStateProperty.all(kButtonColor),
-          textStyle: MaterialStateProperty.all(
-            const TextStyle(fontSize: 12.5, fontWeight: FontWeight.w600),
-          )),
+        elevation: MaterialStateProperty.all(0),
+        backgroundColor: MaterialStateProperty.all(kButtonColor),
+        textStyle: MaterialStateProperty.all(
+          const TextStyle(fontSize: 12.5, fontWeight: FontWeight.w600),
+        ),
+      ),
       child: Container(
         width: MediaQuery.of(context).size.width - minusWidth,
         height: 45,

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/constants.dart';
+import 'package:mobile/constrain/controller.dart';
 import 'package:mobile/models/Product.dart';
 import 'package:mobile/screens/details/details_screen.dart';
 import 'package:mobile/screens/home/components/categories.dart';
 import 'package:mobile/screens/home/components/item_card.dart';
+import 'package:mobile/screens/post/controller/post_controller.dart';
 
 class Body extends StatelessWidget {
   const Body({super.key});
@@ -48,7 +50,7 @@ class Body extends StatelessWidget {
                   padding:
                       const EdgeInsets.symmetric(vertical: kDefaultPaddin / 2),
                   child: Text(
-                    "Khám Phá Danh Mục",
+                    "Explore Categories",
                     style: Theme.of(context)
                         .textTheme
                         .headline5!
@@ -60,24 +62,30 @@ class Body extends StatelessWidget {
           ),
           const Categories(),
           Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddin),
-              child: GridView.builder(
-                itemCount: products.length,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: 0.75,
-                  mainAxisSpacing: kDefaultPaddin,
-                  crossAxisSpacing: kDefaultPaddin,
-                ),
-                itemBuilder: (context, index) => ItemCard(
-                  product: products[index],
-                  press: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            DetailsScreen(product: products[index]),
-                      )),
+            child: Container(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddin),
+                child: Container(
+                  child: GridView.builder(
+                    itemCount: postController.listPosts.length,
+                    // products.length
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      childAspectRatio: 0.75,
+                      mainAxisSpacing: kDefaultPaddin,
+                      crossAxisSpacing: kDefaultPaddin,
+                    ),
+                    itemBuilder: (context, index) => ItemCard(
+                      post: postController.listPosts.value[index],
+                      press: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DetailsScreen(
+                                post: postController.listPosts.value[index]),
+                          )),
+                    ),
+                  ),
                 ),
               ),
             ),

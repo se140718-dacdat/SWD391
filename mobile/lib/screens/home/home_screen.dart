@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 // ignore: import_of_legacy_library_into_null_safe
 // import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mobile/constants.dart';
+import 'package:mobile/constrain/controller.dart';
 import 'package:mobile/logo_page.dart';
 import 'package:mobile/screens/home/components/body.dart';
 import 'package:mobile/screens/login/login_screen.dart';
@@ -29,14 +30,9 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
   @override
   void initState() {
-    checkLogin();
+    postController.listPosts;
+    categoryController.loadData();
     super.initState();
-  }
-
-  void checkLogin() async {
-    final SharedPreferences preferences = await SharedPreferences.getInstance();
-    isLogged = preferences.getBool("isLoggedin")!;
-    debugPrint("isLogged:${isLogged}");
   }
 
   @override

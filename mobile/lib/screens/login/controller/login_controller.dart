@@ -21,29 +21,29 @@ class LoginController extends GetxController {
   Rx<Account> user = Account().obs;
   RxBool isLogin = false.obs;
   RxString msg = "".obs;
+  RxString jwtToken = "".obs;
+  RxBool rememberMe = false.obs;
 
   void login() async {
     Login loginModel = Login(userName: userName.text, password: password.text);
+    debugPrint(loginToJson(loginModel));
     var response =
-        await NetworkHandler.post(loginToJson(loginModel), "authen/login");
+        await NetworkHandler.post(loginToJson(loginModel), "authen/login", "");
     var data = json.decode(response);
     msg.value = data['message'];
-    debugPrint(data['message']);
 
     if (data['message'] == 'Username Or Password wrong!!') {
-      debugPrint(data['message']);
       msg.value = data['message'];
 
       Get.to(() => const LoginPage());
     }
     if (data['message'] == 'Success') {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setBool("isLoggedin", true);
       msg.value = data['message'];
-      print(Account.fromMap(data["data"]));
       user.value = Account.fromMap(data["data"]);
-      prefs.setString("userId", user.value.id.toString());
-
+      jwtToken.value = user.value.jwtToken.toString();
+      debugPrint(jwtToken.value);
+      debugPrint("id: ${user.value.id}");
+      msg.value = "";
       isLogin.value = true;
       Get.to(() => const HomeScreen());
     }
@@ -58,11 +58,15 @@ class LoginController extends GetxController {
     user.value.phone = "";
     user.value.jwtToken = "";
     user.value.role = "";
+    if (rememberMe.value != true) {
+      userName.text = "";
+      password.text = "";
+    }
 
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     sharedPreferences.setBool("isLoggedin", false);
     sharedPreferences.setString("userId", "");
     isLogin.value = false;
-    Get.off(() => const HomeScreen());
+    Get.offAll(() => const HomeScreen());
   }
 }

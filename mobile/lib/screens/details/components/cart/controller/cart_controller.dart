@@ -1,4 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mobile/models/Post.dart';
 import 'package:mobile/models/Product.dart';
 import 'package:mobile/screens/details/components/cart/cart_model/cart_list_model.dart';
 
@@ -7,7 +9,10 @@ class CartController extends GetxController {
   var totalQty = 0.obs;
   dynamic totalAmount = 0.obs;
   var cartItems = <CartItemListModel>[].obs;
-  void removeItem(Product product) {
+
+  static CartController instance = Get.find();
+
+  void removeItem(Post product) {
     if (numOfItems > 1) {
       numOfItems.value--;
     }
@@ -17,28 +22,43 @@ class CartController extends GetxController {
     numOfItems.value++;
   }
 
-  void addItemInCart(Product product) {
-    final index = cartItems.indexWhere((element) => element.product == product);
+  void addItemInCart(Post post) {
+    if (totalQty.value < 0) {
+      totalQty.value = 0;
+    }
+    final index = cartItems.indexWhere((element) => element.post == post);
     if (index > 0) {
       cartItems[index] = CartItemListModel(
-          product: product, qty: (numOfItems.value + cartItems[index].qty));
+          post: post, qty: (numOfItems.value + cartItems[index].qty));
     } else {
-      cartItems.add(CartItemListModel(product: product, qty: numOfItems.value));
+      cartItems.add(CartItemListModel(post: post, qty: numOfItems.value));
     }
     totalQty.value = totalQty.value + numOfItems.value;
     numOfItems.value = 1;
-    totalAmount = (totalAmount + ((product.price.toInt()) * numOfItems.value));
+    totalAmount =
+        (totalAmount + ((post.product!.price!.toInt()) * numOfItems.value));
   }
 
-  void removeItemInCart(Product product) {
-    cartItems.remove(product);
+  void removeItemInCart(Post post) {
+    final index = cartItems.indexWhere((element) => element.post == post);
+    cartItems.remove(CartItemListModel(post: post, qty: numOfItems.value));
     totalQty.value = totalQty.value - numOfItems.value;
+    totalAmount =
+        (totalAmount - ((post.product!.price!.toInt()) * numOfItems.value));
+    if (totalQty.value < 0) {
+      totalQty.value = 0;
+    }
+    if (totalAmount.value < 0) {
+      totalAmount.value = 0;
+    }
   }
 
   void removeThisItemInCart(CartItemListModel currentItem) {
     cartItems.remove(currentItem);
+    debugPrint(cartItems.value.toList().toString());
+
     // totalAmount = totalAmount - currentItem.product.price;
     totalAmount = (totalAmount -
-        ((currentItem.product.price.toInt()) * numOfItems.value));
+        ((currentItem.post.product!.price!.toInt()) * numOfItems.value));
   }
 }

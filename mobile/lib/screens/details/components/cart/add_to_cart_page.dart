@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mobile/constants.dart';
+import 'package:mobile/constrain/controller.dart';
+import 'package:mobile/models/Post.dart';
 import 'package:mobile/models/Product.dart';
 import 'package:mobile/screens/details/components/cart/cart_list/cart_list.dart';
-import 'package:mobile/screens/details/components/cart/controller/cart_controller.dart';
+import 'package:mobile/screens/login/login_screen.dart';
 
 class AddToCartPage extends StatefulWidget {
   AddToCartPage({
     Key? key,
-    required this.product,
+    required this.post,
   }) : super(key: key);
-  final Product product;
+  final Post post;
 
   @override
   State<AddToCartPage> createState() => _AddToCartPageState();
 }
 
 class _AddToCartPageState extends State<AddToCartPage> {
-  CartController cartController = Get.find();
-
   bool isChoose = false;
 
   @override
@@ -31,16 +31,20 @@ class _AddToCartPageState extends State<AddToCartPage> {
         children: <Widget>[
           InkWell(
             onTap: () {
-              if (!isChoose) {
-                cartController.addItemInCart(widget.product);
-                setState(() {
-                  isChoose = true;
-                });
+              if (loginController.isLogin.value == false) {
+                Get.to(() => const LoginPage());
               } else {
-                cartController.removeItemInCart(widget.product);
-                setState(() {
-                  isChoose = false;
-                });
+                if (!isChoose) {
+                  cartController.addItemInCart(widget.post);
+                  setState(() {
+                    isChoose = true;
+                  });
+                } else {
+                  cartController.removeItemInCart(widget.post);
+                  setState(() {
+                    isChoose = false;
+                  });
+                }
               }
             },
             child: Container(

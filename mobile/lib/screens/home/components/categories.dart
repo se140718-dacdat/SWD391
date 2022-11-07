@@ -13,13 +13,12 @@ class Categories extends StatefulWidget {
 }
 
 class _CategoriesState extends State<Categories> {
-  List<String> categories = ["TV", "Tủ Lạnh", "Xe máy", "Bàn", "Ghế", "Xe máy"];
-
   int selectedIndex = 0;
+  int lastIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: kDefaultPaddin),
+      padding: const EdgeInsets.symmetric(vertical: kDefaultPaddin / 3),
       child: SizedBox(
         height: 25,
         child: ListView.builder(
@@ -34,8 +33,12 @@ class _CategoriesState extends State<Categories> {
   Widget buildCategory(int index) {
     return GestureDetector(
       onTap: () {
+        debugPrint("cate ID: ${categoryController.listCates.value[index].id}");
+        postController.getPostByCateID(
+            categoryController.listCates.value[index].id.toString());
         setState(() {
           selectedIndex = index;
+          lastIndex = index;
         });
       },
       child: Padding(
@@ -53,8 +56,8 @@ class _CategoriesState extends State<Categories> {
             Container(
               margin: const EdgeInsets.only(top: kDefaultPaddin / 4),
               height: 2,
-              width: 30,
-              color: selectedIndex == index ? Colors.black : Colors.transparent,
+              width: 50,
+              color: lastIndex == index ? Colors.black : Colors.transparent,
             )
           ],
         ),

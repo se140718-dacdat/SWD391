@@ -3,8 +3,11 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mobile/constants.dart';
+import 'package:mobile/controller/account_controller.dart';
 import 'package:mobile/controller/building_controller.dart';
 import 'package:mobile/controller/category_controller.dart';
+import 'package:mobile/controller/checkout_controller.dart';
+import 'package:mobile/controller/order_controller.dart';
 import 'package:mobile/controller/product_controller.dart';
 import 'package:mobile/screens/home/home_screen.dart';
 import 'package:mobile/screens/login/controller/login_controller.dart';
@@ -24,6 +27,11 @@ Future<void> main(List<String> args) async {
   Get.put(BuildingController());
   Get.put(PostController());
   Get.put(ProductController());
+  Get.put(CartController());
+  Get.put(AccountController());
+  Get.put(OrderController());
+  Get.put(CheckOutController());
+
   var isLoggedIn = (preferences.getBool("isLoggedin") == null)
       ? false
       : preferences.getBool("isLoggedin");

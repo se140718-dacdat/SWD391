@@ -8,6 +8,7 @@ import 'package:mobile/screens/login/login_screen.dart';
 import 'package:mobile/screens/user/footer_content.dart';
 import 'package:mobile/screens/user/profile_item/profile_item.dart';
 import 'package:mobile/screens/user/sp_solid_btn/sp_solid_btn.dart';
+import 'package:mobile/service/utils/coming_soon.dart';
 
 class ProfileWithoutLogin extends StatefulWidget {
   const ProfileWithoutLogin({super.key});
@@ -126,20 +127,36 @@ class _ProfileWithoutLoginState extends State<ProfileWithoutLogin> {
                     subTitle: "Check your order status",
                     isLast: false,
                     onTap: () {
-                      Get.bottomSheet(const LoginPage());
+                      if (loginController.isLogin.value == false) {
+                        Get.bottomSheet(const LoginPage());
+                      } else {
+                        Get.to(
+                          () => const ComingSoon(),
+                        );
+                      }
                     },
                   ),
-                  const ProfileItem(
+                  ProfileItem(
                     title: 'Help Center',
                     assetName: 'help-center.png',
                     subTitle: "Help regarding your recent purchase",
                     isLast: false,
+                    onTap: () {
+                      Get.to(
+                        () => const ComingSoon(),
+                      );
+                    },
                   ),
-                  const ProfileItem(
+                  ProfileItem(
                     title: 'Wishlist',
                     assetName: 'wishlist.png',
                     subTitle: "Your most loved style",
                     isLast: true,
+                    onTap: () {
+                      Get.to(
+                        () => const ComingSoon(),
+                      );
+                    },
                   ),
                 ],
               ),
@@ -150,16 +167,26 @@ class _ProfileWithoutLoginState extends State<ProfileWithoutLogin> {
             Container(
               color: kWhiteColor,
               child: Column(
-                children: const [
+                children: [
                   ProfileItem(
                     title: 'Scan for coupon',
                     assetName: 'qr.png',
                     isLast: false,
+                    onTap: () {
+                      Get.to(
+                        () => const ComingSoon(),
+                      );
+                    },
                   ),
                   ProfileItem(
                     title: 'Refer & Earn',
                     assetName: 'salary.png',
                     isLast: true,
+                    onTap: () {
+                      Get.to(
+                        () => const ComingSoon(),
+                      );
+                    },
                   ),
                 ],
               ),
@@ -175,8 +202,7 @@ class _ProfileWithoutLoginState extends State<ProfileWithoutLogin> {
                       minusWidth: 100,
                       onPressed: (() {
                         loginController.logout();
-                        Get.to(const HomeScreen());
-                        Get.off(const LoginPage());
+                        Get.offAll(const HomeScreen());
                         setState(() {
                           img = "null";
                         });

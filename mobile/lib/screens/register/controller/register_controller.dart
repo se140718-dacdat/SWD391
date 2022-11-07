@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mobile/constrain/controller.dart';
 import 'package:mobile/models/Register.dart';
+import 'package:mobile/models/model_get/GetAccount.dart';
 import 'package:mobile/screens/home/home_screen.dart';
 import 'package:mobile/screens/login/login_screen.dart';
 import 'package:mobile/screens/register/resgister_screen.dart';
@@ -29,8 +30,8 @@ class RegisterController extends GetxController {
         gender: gender.toString(),
         buildingId: registerController.buildingId.value.toString(),
       );
-      var response =
-          await NetworkHandler.post(registerToJson(registerModel), "accounts");
+      var response = await NetworkHandler.post(
+          registerToJson(registerModel), "accounts", "");
       var data = json.decode(response);
       if (data['message'] == 'Success') {
         Get.to(() => const LoginPage());
@@ -39,10 +40,4 @@ class RegisterController extends GetxController {
       e.printError();
     }
   }
-
-  // void checkUserExist(String id) async {
-  //   var response = await NetworkHandler.get('accounts/$id');
-  //   var data = json.decode(response);
-  //   debugPrint(data['msg']);
-  // }
 }

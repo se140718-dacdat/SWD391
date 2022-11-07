@@ -45,6 +45,8 @@ dependencies:
   auto_size_text: ^3.0.0
   shared_preferences: ^2.0.15
   dropdown_button2: ^1.8.9
+  image_picker: ^0.8.6
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:
