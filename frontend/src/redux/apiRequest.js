@@ -21,7 +21,6 @@ export const loginUser = async (user, dispatch, navigate) => {
     try {
         const res = await axios.post("http://nguyenxuanthuan-001-site1.htempurl.com/api/authen/login", user);
         dispatch(loginSuccess(res.data));
-        console.log(res.data);
         navigate("/");
     } catch (err) {
         dispatch(loginFailed());
@@ -41,8 +40,8 @@ export const registerUser = async (user) => {
 export const logoutUser = async (dispatch, navigate) => {
     dispatch(logoutStart());
     try {
+        dispatch(clearSuccess());
         dispatch(logoutSuccess());
-        dispatch(clearCart());
         navigate("/");
     } catch (err) {
         dispatch(logoutFailed());

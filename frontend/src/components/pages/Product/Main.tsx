@@ -21,15 +21,15 @@ const Main = () => {
         icon: "https://pic.onlinewebfonts.com/svg/img_123607.png"
     };
     useEffect(() => {
-        handleFilter();
-    }, [page]);
+        fetchData();
+    }, [page, filter]);
     const redirectProduct = (post: PostShow) => {
         getPost(post, dispatch, navigate);
     }
     async function fetchData() {
         const response = await fetch(`http://nguyenxuanthuan-001-site1.htempurl.com/api/posts?page=${page}&pageSize=5`);
         const data = await response.json();
-        setPosts(data.data);
+        handleFilter(data.data);
         const res = await fetch(`http://nguyenxuanthuan-001-site1.htempurl.com/api/posts`);
         const resData = await res.json();
         setAllPosts(resData.data);
@@ -51,21 +51,16 @@ const Main = () => {
         )
     }
 
-    const handleFilter = () => {
+    const handleFilter = (posts: PostShow[]) => {
         switch (filter) {
             case "1":
-                fetchData();
-                setPosts(_.orderBy(posts, ['title', 'price'], ['asc', 'desc']));
-                console.log(posts);
+                setPosts(_.orderBy(posts, ['price'], ['asc', 'desc']));
                 break;
             case "2":
-                fetchData();
-                setPosts(_.orderBy(posts, ['title', 'price'], ['desc', 'asc']));
-                console.log(posts);
+                setPosts(_.orderBy(posts, ['price'], ['desc', 'asc']));
                 break;
             default:
-                fetchData();
-                console.log(posts);
+                setPosts(posts);
                 break;
         }
     }
@@ -73,7 +68,7 @@ const Main = () => {
         <div id="Main" className="right-side">
             <div className="nav-title">
                 <h3>{category.name}</h3>
-                <Form.Select aria-label="Default select example" className="filter" onChange={(e) => {setFilter(e.target.value)}}>
+                <Form.Select aria-label="Default select example" className="filter" onChange={(e) => { setFilter(e.target.value)}}>
                     <option>Default</option>
                     <option value="1">Lowest first</option>
                     <option value="2">Highest first</option>

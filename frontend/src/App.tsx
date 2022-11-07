@@ -13,8 +13,8 @@ import { useSelector } from 'react-redux';
 import Filter from './components/pages/Product/Filter';
 import Cart from './components/pages/Cart/Cart';
 import ProductPage from './components/pages/Product/ProductPage';
-import { Product } from './model';
 import Store from './components/pages/Product/Store';
+
 
 function App() {
   const user = useSelector((state: any) => state.auth.login.currentUser);

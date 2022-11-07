@@ -7,18 +7,20 @@ import { PostShow } from "../../../model";
 import { currencyMaskString } from "../../../mask";
 import { getPost } from "../../../redux/apiRequest";
 import { useDispatch, useSelector } from "react-redux";
+import _ from "lodash";
 
 
 const Store = () => {
     const user = useSelector((state: any) => state.auth.login.currentUser.data);
     const [posts, setPosts] = useState<PostShow[]>([]);
     const [allPosts, setAllPosts] = useState<PostShow[]>([]);
+    const [filter, setFilter] = useState<string>();
+    const [page, setPage] = useState<number>(1);
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const [page, setPage] = useState<number>(1);
     useEffect(() => {
         fetchData();
-    }, [page]);
+    }, [page, filter]);
     const redirectProduct = (post: PostShow) => {
         getPost(post, dispatch, navigate);
     }
@@ -31,7 +33,7 @@ const Store = () => {
                 },
             });
             const resData = await res.json();
-            setPosts(resData.data);
+            handleFilter(resData.data);
             const response = await fetch(`http://nguyenxuanthuan-001-site1.htempurl.com/api/posts/accounts?id=${user?.id}`, {
                 headers: {
                     Authorization: `Bearer ${user?.jwtToken}`,
@@ -42,6 +44,20 @@ const Store = () => {
             setAllPosts(data.data);
         } catch (error) {
             return error;
+        }
+    }
+    const handleFilter = (posts: PostShow[]) => {
+        console.log(posts);
+        switch (filter) {
+            case "1":
+                setPosts(_.orderBy(posts, ['price'], ['asc', 'desc']));
+                break;
+            case "2":
+                setPosts(_.orderBy(posts, ['price'], ['desc', 'asc']));
+                break;
+            default:
+                setPosts(posts);
+                break;
         }
     }
     async function removePost(id: string) {
@@ -79,11 +95,10 @@ const Store = () => {
         <div id="Main" className="right-side">
             <div className="nav-title">
                 <h3>Manage Posts</h3>
-                <Form.Select aria-label="Default select example" className="filter">
-                    <option>Mặc định</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                <Form.Select aria-label="Default select example" className="filter" onChange={(e)=> {setFilter(e.target.value)}}>
+                    <option>Default</option>
+                    <option value="1">Lowest</option>
+                    <option value="2">Highest</option>
                 </Form.Select>
             </div>
             <div className="user-info">

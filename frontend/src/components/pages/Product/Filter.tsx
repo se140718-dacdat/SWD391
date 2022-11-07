@@ -6,12 +6,14 @@ import "./Main.css";
 import { Category, PostShow } from "../../../model";
 import { getPost } from "../../../redux/apiRequest";
 import { currencyMaskString } from "../../../mask";
+import _ from 'lodash';
 
 const Filter = () => {
     const params = useParams();
     const [posts, setPosts] = useState<PostShow[]>([]);
     const [allPosts, setAllPosts] = useState<PostShow[]>([]);
     const [page, setPage] = useState<number>(1);
+    const [filter, setFilter] = useState<string>();
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [category, setCategory] = useState<Category>({
@@ -21,12 +23,12 @@ const Filter = () => {
     });
     useEffect(() => {
         fetchData();
-    }, []);
+    }, [page, filter]);
 
     async function fetchData() {
         const response = await fetch(`http://nguyenxuanthuan-001-site1.htempurl.com/api/posts/catecories?id=${params.id}&page=${page}&pageSize=5`);
         const data = await response.json();
-        setPosts(data.data);
+        handleFilter(data.data);
         const res = await fetch(`http://nguyenxuanthuan-001-site1.htempurl.com/api/posts/catecories?id=${params.id}`);
         const resData = await res.json();
         setAllPosts(resData.data);
@@ -52,6 +54,21 @@ const Filter = () => {
         )
     }
 
+    const handleFilter = (posts: PostShow[]) => {
+        console.log(posts);
+        switch (filter) {
+            case "1":
+                setPosts(_.orderBy(posts, ['price'], ['asc', 'desc']));
+                break;
+            case "2":
+                setPosts(_.orderBy(posts, ['price'], ['desc', 'asc']));
+                break;
+            default:
+                setPosts(posts);
+                break;
+        }
+    }
+
     const redirectProduct = (post: PostShow) => {
         getPost(post, dispatch, navigate);
     }
@@ -59,11 +76,10 @@ const Filter = () => {
         <div id="Main" className="right-side">
             <div className="nav-title">
                 <h3>{category?.name}</h3>
-                <Form.Select aria-label="Default select example" className="filter">
-                    <option>Mặc định</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                <Form.Select aria-label="Default select example" className="filter" onChange={(e)=>{setFilter(e.target.value)}}>
+                    <option>Default</option>
+                    <option value="1">Lowest</option>
+                    <option value="2">Highest</option>
                 </Form.Select>
             </div>
             <ul className="products">
