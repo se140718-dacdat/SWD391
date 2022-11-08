@@ -107,7 +107,7 @@ const Store = () => {
                     <span className='user-info-name'>{user?.fullName}</span>
                     <span className='user-info-email'>{user?.description}</span>
                     <div className="inline-block">
-                        <button className="btn-primary-oposite">See all profiles</button>
+                        <button className="btn-primary-oposite" onClick={() => {navigate("/profile")}}>See all profiles</button>
                         <button className="btn-primary-oposite">E-wallet</button>
                     </div>
                 </div>

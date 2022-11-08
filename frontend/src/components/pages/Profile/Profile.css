@@ -1,0 +1,104 @@
+#Profile {
+    background: linear-gradient(to bottom, var(--primary-button-hover) 35%, var(--white-color) 7%);
+    display: flex;
+    justify-content: center;
+}
+
+#Profile .user-wrap {
+    position: relative;
+    margin-top: 120px;
+    height: 100vh;
+    width: 80%;
+    background-color: var(--white-color);
+    box-shadow: 0 3px 13px 0 rgba(32, 40, 49, 0.5);
+    border-radius: 10px;
+    text-align: center;
+}
+
+#Profile .user-avt {
+    max-width: 250px;
+    min-width: 250px;
+    border-radius: 50%;
+    margin-top: -10%;
+    box-shadow: 0 3px 13px 0 rgba(32, 40, 49, 0.5);
+    background-color: var(--white-color);
+}
+
+#Profile .user-react {
+    margin: 20px auto;
+    display: flex;
+    justify-content: space-between;
+    width: 30%;
+}
+
+#Profile .number {
+    display: block;
+    color: var(--primary-button);
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+#Profile .react-number {
+    font-size: 1.1rem;
+    opacity: 0.6;
+}
+
+#Profile .user-name {
+    color: var(--primary-button);
+    margin-top: 10%;
+}
+
+#Profile .user-building {
+    font-size: 1.4rem;
+    font-weight: 100;
+}
+#Profile .user-about {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 8px;
+}
+
+#Profile .btn-edit {
+    position: absolute;
+    right: 0;
+    margin: 30px 20px;
+    border-radius: 6px;
+}
+
+#Profile .edit-title {
+    color: var(--primary-button);
+    text-align: left;
+    padding: 24px 40px;
+}
+
+#Profile .user-edit {
+    width: 60%;
+    margin: auto;
+}
+
+#Profile .edit-input * {
+    display: block;
+    width: 100%;
+    text-align: left;
+}
+
+#Profile .edit-input span {
+    margin: 16px 0 8px 0;
+}
+
+#Profile .edit-input input {
+    padding: 8px 12px;
+    border-radius: 0.375rem;
+    border: 1px solid #ced4da;
+}
+
+#Profile .user-edit button {
+    float: left;
+    margin-top: 24px;
+    padding: 10px 25px !important;
+    border-radius: 8px;
+}
+
+
+
+
