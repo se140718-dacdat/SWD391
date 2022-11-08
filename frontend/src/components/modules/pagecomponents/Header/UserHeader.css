@@ -225,3 +225,13 @@
     color: #aaaaaa;
     font-weight: 600;
 }
+
+#UserHeader .wallet {
+    text-align: right;
+    width: 100%;
+    margin-bottom: 8px;
+}
+
+#UserHeader .pi-money-bill {
+    color: rgba(198, 149, 53, 1);
+}

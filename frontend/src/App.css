@@ -148,3 +148,7 @@
     color: var(--white-color);
     cursor: pointer;
 }
+
+.float-right {
+    float: right;
+}

@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { Building } from "../../../model";
+import {  useSelector } from "react-redux";
+import { Building, editProfile } from "../../../model";
+import { loginUser } from "../../../redux/apiRequest";
 import './Profile.css';
 
 const Profile = () => {
@@ -11,14 +11,14 @@ const Profile = () => {
     const [phone, setPhone] = useState(user.phone);
     const [selectBuilding, setSelectBuilding] = useState(user.building);
     const [fullName, setFullname] = useState(user.fullName);
+    const [password, setPassword] = useState('');
     const [avatarUrl, setAvatarUrl] = useState(user.avatarUrl);
     const [gender, setGender] = useState(user.gender);
     const [description, setDescription] = useState(user.description);
     const [buildings, setBuildings] = useState<Building[]>([]);
-
     useEffect(() => {
         fetchData();
-    }, []);
+    }, [edit]);
 
     async function fetchData() {
         try {
@@ -28,6 +28,35 @@ const Profile = () => {
         } catch (error) {
             return error;
         }
+    }
+
+    async function editProfile() {
+        try {
+            const response = await fetch(`http://nguyenxuanthuan-001-site1.htempurl.com/api/accounts/${user.id}`, {
+                method: 'PUT',
+                headers: {
+                    Authorization: `Bearer ${user?.jwtToken}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    id: user.id,
+                    password: password,
+                    fullName: fullName,
+                    description: description,
+                    phone: phone,
+                    gender: gender,
+                    avatarUrl: avatarUrl,
+                    buildingId: selectBuilding
+                })
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const handleEdit = (e: FormEvent) => {
+        e.preventDefault();
+        editProfile();
     }
 
     const render = () => {
@@ -66,6 +95,10 @@ const Profile = () => {
                             <input type="text" placeholder="Fullname" onChange={(e) => setFullname(e.target.value)} />
                         </div>
                         <div className="edit-input">
+                            <span>Password</span>
+                            <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
+                        </div>
+                        <div className="edit-input">
                             <span>Avatar URL</span>
                             <input type="text" placeholder="Avatar URL" onChange={(e) => setAvatarUrl(e.target.value)} />
                         </div>
@@ -73,6 +106,7 @@ const Profile = () => {
                             <span>Phone</span>
                             <input type="text" placeholder="Mobile Number" onChange={(e) => setPhone(e.target.value)} />
                         </div>
+
                         <div className="edit-input">
                             <span>Gender</span>
                             <Form.Select onChange={(e) => setGender(e.target.value)} style={{ marginBottom: "24px" }} >
@@ -98,7 +132,9 @@ const Profile = () => {
                             <span>Description</span>
                             <input type="text" placeholder="Desciption" onChange={(e) => setDescription(e.target.value)} />
                         </div>
-                        <button className="btn-primary-color">Save Changes</button>
+                        <div className="float-right">
+                            <button className="btn-primary-color" onClick={(e) => { handleEdit(e) }}>Save Changes</button>
+                        </div>
                     </div>
                 </div>
             )

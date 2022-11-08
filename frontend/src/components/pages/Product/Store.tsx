@@ -47,7 +47,6 @@ const Store = () => {
         }
     }
     const handleFilter = (posts: PostShow[]) => {
-        console.log(posts);
         switch (filter) {
             case "1":
                 setPosts(_.orderBy(posts, ['price'], ['asc', 'desc']));
@@ -69,7 +68,6 @@ const Store = () => {
                     'Content-Type': 'application/json'
                 },
             });
-            console.log(response);
         } catch (error) {
             console.log(error);
         }

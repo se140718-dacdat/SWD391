@@ -7,7 +7,7 @@
 #Profile .user-wrap {
     position: relative;
     margin-top: 120px;
-    height: 100vh;
+    height: 110vh;
     width: 80%;
     background-color: var(--white-color);
     box-shadow: 0 3px 13px 0 rgba(32, 40, 49, 0.5);

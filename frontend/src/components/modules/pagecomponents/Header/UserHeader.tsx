@@ -53,12 +53,12 @@ const UserHeader: React.FC = props => {
                     </ul>
                     <div className="cart-footer">
                         <div className='total'><strong>Total: </strong>{`$${currencyMaskString(getTotal(cart))}`}</div>
-                        <button className="btn-checkout btn-primary-color" 
-                        onClick={
-                            ()=>{
-                                navigate("/cart")
+                        <button className="btn-checkout btn-primary-color"
+                            onClick={
+                                () => {
+                                    navigate("/cart")
+                                }
                             }
-                        }
                         >Checkout</button>
                     </div>
                 </div>
@@ -162,6 +162,9 @@ const UserHeader: React.FC = props => {
                                         <span className='user-info-name'>{user.fullName}</span>
                                         <span className='user-info-email'>{user.description}</span>
                                     </div>
+                                </div>
+                                <div className="wallet">
+                                    000 <i className='pi pi-money-bill'></i>
                                 </div>
                                 <button className="btn-logout btn-primary-color" onClick={() => { logout() }}>Logout</button>
                             </div>

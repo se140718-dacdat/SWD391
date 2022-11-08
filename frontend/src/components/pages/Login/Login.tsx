@@ -16,8 +16,8 @@ const Login: React.FC = props => {
     const [avatarUrl, setAvatarUrl] = useState('');
     const [gender, setGender] = useState('');
     const [description, setDescription] = useState('');
-    const [login, isLogin] = useState(1);
     const [buildings, setBuildings] = useState<Building[]>([]);
+    const [login, isLogin] = useState(1);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const signInSubmit = (e: FormEvent) => {

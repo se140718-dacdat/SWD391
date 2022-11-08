@@ -1,6 +1,3 @@
-import Pagination from 'react-bootstrap/Pagination';
-
-
 export enum Roles {
     Admin = 1,
     User = 2
@@ -99,4 +96,28 @@ export interface checkoutForm {
     description: string;
     transactionType: string;
     cartList: cartList[];
+}
+
+export interface editProfile {
+    id: string;
+    password: string;
+    fullName: string;
+    description: string;
+    phone: string;
+    gender: string;
+    avatarUrl: string;
+    buildingId: string;
+}
+
+export interface User {
+    id: string;
+    fullName: string;
+    description: string;
+    phone: string;
+    gender: string;
+    avatarUrl: string;
+    building: Building;
+    role: string;
+    status: boolean;
+    jwtToken: string;
 }
