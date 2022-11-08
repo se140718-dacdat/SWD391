@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import "./Main.css";
 import { Category, PostShow } from "../../../model";
 import { currencyMaskString } from "../../../mask";
-import { getPost } from "../../../redux/apiRequest";
-import { useDispatch } from "react-redux";
+import { getPost, getUser } from "../../../redux/apiRequest";
+import { useDispatch, useSelector } from "react-redux";
 import _ from 'lodash';
 
 const Main = () => {
@@ -20,12 +20,15 @@ const Main = () => {
         name: "All Categories",
         icon: "https://pic.onlinewebfonts.com/svg/img_123607.png"
     };
+
     useEffect(() => {
         fetchData();
     }, [page, filter]);
+
     const redirectProduct = (post: PostShow) => {
         getPost(post, dispatch, navigate);
     }
+
     async function fetchData() {
         const response = await fetch(`http://nguyenxuanthuan-001-site1.htempurl.com/api/posts?page=${page}&pageSize=5`);
         const data = await response.json();
@@ -34,6 +37,7 @@ const Main = () => {
         const resData = await res.json();
         setAllPosts(resData.data);
     }
+
     const Paging = (lenght: number) => {
         let items: any = [];
         for (let number = 1; number <= lenght % 5; number++) {
@@ -64,11 +68,12 @@ const Main = () => {
                 break;
         }
     }
+    
     return (
         <div id="Main" className="right-side">
             <div className="nav-title">
                 <h3>{category.name}</h3>
-                <Form.Select aria-label="Default select example" className="filter" onChange={(e) => { setFilter(e.target.value)}}>
+                <Form.Select aria-label="Default select example" className="filter" onChange={(e) => { setFilter(e.target.value) }}>
                     <option>Default</option>
                     <option value="1">Lowest first</option>
                     <option value="2">Highest first</option>

@@ -5,34 +5,50 @@ import { cartItem, checkoutForm, getProducts, getTotal, PostShow } from "../../.
 import { checkoutRequest, clearCart } from "../../../redux/apiRequest";
 import "./Cart.css";
 import { useState } from "react";
+import MessageBox from "../../modules/pagecomponents/popups/MessageBox/MessageBox";
 
 const Cart = () => {
     const cart = useSelector((state: any) => state.cart.cart.currentCart);
     const user = useSelector((state: any) => state.auth.login.currentUser.data);
-    const [transactionType, setTransactionType] = useState<string>('');
-    const [message, setMessage] = useState<string>();
+    const [transactionType, setTransactionType] = useState('');
+    const [message, setMessage] = useState('');
+    const [messageStatus, setMessageStatus] = useState('');
     const dispatch = useDispatch();
 
     const handleCheckout = () => {
+        if (!(getProducts(cart).length < 1)) {
+            if (!(transactionType == "")) {
+                let checkout: checkoutForm = {
+                    accountId: user?.id,
+                    walletId: user?.id,
+                    description: "Some description",
+                    transactionType: transactionType,
+                    cartList: getProducts(cart)
+                };
+                checkoutRequest(checkout, user);
+                setMessage("Checkout successfully!");
+                setMessageStatus("green");
+                clearCart(dispatch);
+            } else {
+                setMessage("Please select transaction type!");
+                setMessageStatus("red");
 
-        let checkout: checkoutForm = {
-            accountId: user?.id,
-            walletId: user?.id,
-            description: "Some desciption",
-            transactionType: transactionType,
-            cartList: getProducts(cart)
-        };
-        let check = true;
-        console.log(checkoutRequest(checkout, user, dispatch))
-        if (check) {
-            clearCart(dispatch);
+            }
         } else {
-            setMessage('Checkout fail! Please try again.')
+            setMessage("Cart is empty!");
+            setMessageStatus("red");
+
         }
     }
 
     return (
         <div id="Cart" className="right-side">
+            {
+                message != '' ?
+                    <MessageBox status={messageStatus} message={message} setMessage={setMessage} title='inasd'></MessageBox>
+                    :
+                    null
+            }
             <h1 style={{ fontSize: "2rem", fontWeight: "700" }}>Cart</h1>
             <div className="cart-wrapper">
                 <table>
@@ -71,8 +87,8 @@ const Cart = () => {
                                 <td>
                                     <Form.Select aria-label="Default select example" onChange={(e) => {
                                         setTransactionType(e.target.value);
-                                        console.log(transactionType)
-                                    }}>
+                                    }} required>
+                                        <option value="">Select Type</option>
                                         <option value="COD">COD</option>
                                         <option value="VI">VI</option>
                                         <option value="Banking">Banking</option>

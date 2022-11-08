@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import "primeicons/primeicons.css";
 import './App.css';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
@@ -9,16 +9,32 @@ import Main from './components/pages/Product/Main';
 import Login from './components/pages/Login/Login';
 import CreatePost from './components/pages/Post/CreatePost';
 import UserHeader from './components/modules/pagecomponents/Header/UserHeader';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Filter from './components/pages/Product/Filter';
 import Cart from './components/pages/Cart/Cart';
 import ProductPage from './components/pages/Product/ProductPage';
 import Store from './components/pages/Product/Store';
 import Profile from './components/pages/Profile/Profile';
-
+import { getUser } from './redux/apiRequest';
 
 function App() {
+  const dispatch = useDispatch();
   const user = useSelector((state: any) => state.auth.login.currentUser);
+
+  useEffect(() => {
+    fetchData();
+  }, [])
+
+  async function fetchData() {
+    try {
+        if(user) {
+          getUser(user?.data.id, user?.data.jwtToken, dispatch);
+        }
+    } catch (error) {
+        return error;
+    }
+}
+
   const renderAuth = () => {
     switch (user?.data.role) {
       case "USER":

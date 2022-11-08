@@ -52,9 +52,7 @@ export interface PostShow {
 
 export interface ProductCheckout {
     id: string;
-    total: number;
     quantity: number;
-    price: number;
 }
 
 export interface cartItem {
@@ -75,9 +73,7 @@ export const getProducts = (cart: cartItem[]) => {
     cart?.forEach(item => {
         products.push({
             id: item.post.id,
-            total: item.post.price * item.quantity,
-            quantity: item.quantity,
-            price: item.post.price
+            quantity: item.quantity
         })
     });
     return products;
@@ -85,9 +81,7 @@ export const getProducts = (cart: cartItem[]) => {
 
 export interface cartList {
     id: string,
-    total: number,
     quantity: number,
-    price: number
 }
 
 export interface checkoutForm {

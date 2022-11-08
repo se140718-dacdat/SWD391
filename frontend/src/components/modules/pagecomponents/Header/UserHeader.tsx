@@ -5,12 +5,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "./UserHeader.css";
 import { useDispatch, useSelector } from "react-redux";
 import { Nav, Navbar, OverlayTrigger, Tooltip, NavDropdown, Dropdown } from 'react-bootstrap';
-import { clearCart, logoutUser } from '../../../../redux/apiRequest';
-import { cartItem, getTotal, Post, PostShow, Product } from '../../../../model';
-import { currencyMask, currencyMaskString } from '../../../../mask';
+import {  logoutUser } from '../../../../redux/apiRequest';
+import { cartItem, getTotal } from '../../../../model';
+import {  currencyMaskString } from '../../../../mask';
 
 const UserHeader: React.FC = props => {
-    const user = useSelector((state: any) => state.auth.login.currentUser.data);
+    const user = useSelector((state: any) => state.user.user.currentUser);
     const cart = useSelector((state: any) => state.cart.cart.currentCart);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -26,7 +26,7 @@ const UserHeader: React.FC = props => {
         } else {
             isShowCart("display-none");
         }
-    });
+    }, []);
 
 
     const renderNotification = (name: string) => {
@@ -153,18 +153,18 @@ const UserHeader: React.FC = props => {
                                 setShow("display-none")
                                 : setShow("")
                         }}>
-                            <span className='user-name'>{user.fullName}</span>
-                            <img src={user.avatarUrl} alt="user-avt" className='user-avt' />
+                            <span className='user-name'>{user?.fullName}</span>
+                            <img src={user?.avatarUrl} alt="user-avt" className='user-avt' />
                             <div className={`user-option ${show}`}>
                                 <div className="user-info">
-                                    <img src={user.avatarUrl} alt="user-avt" className='user-info-avt' />
+                                    <img src={user?.avatarUrl} alt="user-avt" className='user-info-avt' />
                                     <div className='block'>
-                                        <span className='user-info-name'>{user.fullName}</span>
-                                        <span className='user-info-email'>{user.description}</span>
+                                        <span className='user-info-name'>{user?.fullName}</span>
+                                        <span className='user-info-email'>{user?.description}</span>
                                     </div>
                                 </div>
                                 <div className="wallet">
-                                    000 <i className='pi pi-money-bill'></i>
+                                  {currencyMaskString(user?.wallet.balance)}  <i className='pi pi-money-bill'></i>
                                 </div>
                                 <button className="btn-logout btn-primary-color" onClick={() => { logout() }}>Logout</button>
                             </div>

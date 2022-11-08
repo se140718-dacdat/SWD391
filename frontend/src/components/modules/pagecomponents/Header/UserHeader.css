@@ -2,7 +2,7 @@
     border-bottom: 1px solid #ccc;
     width: 100%;
     position: fixed;
-    z-index: 12;
+    z-index: 2;
 }
 
 #UserHeader .link {
@@ -80,6 +80,10 @@
 
 #UserHeader .cart-item-wrap * {
     text-decoration: none;
+}
+
+#UserHeader .cart-item {
+    width: 65%;
 }
 
 #UserHeader .item-img {

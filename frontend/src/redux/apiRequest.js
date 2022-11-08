@@ -2,6 +2,7 @@ import axios from "axios";
 import { loginFailed, loginStart, loginSuccess, logoutFailed, logoutStart, logoutSuccess } from "./authSlice";
 import { cartFailed, cartStart, cartSuccess, clearFailed, clearStart, clearSuccess, quantityFailed, quantityStart, quantitySuccess } from "./cartSlice";
 import { postFailed, postStart, postSuccess } from "./postSlice";
+import { clearUserSuccess, userFailed, userStart, userSuccess } from "./userSlice";
 
 
 // export const loginUser = async (user, dispatch, navigate) => {
@@ -41,10 +42,27 @@ export const logoutUser = async (dispatch, navigate) => {
     dispatch(logoutStart());
     try {
         dispatch(clearSuccess());
+        dispatch(clearUserSuccess());
         dispatch(logoutSuccess());
         navigate("/");
     } catch (err) {
         dispatch(logoutFailed());
+    }
+}
+
+export const getUser = async (id, jwtToken, dispatch) => {
+    dispatch(userStart());
+    try {
+        const res = await fetch(`http://nguyenxuanthuan-001-site1.htempurl.com/api/accounts/${id}`, {
+            headers: {
+                Authorization: `Bearer ${jwtToken}`,
+                'Content-Type': 'application/json'
+            }
+        });
+        const data = await res.json();
+        dispatch(userSuccess(data.data));
+    } catch (err) {
+        dispatch(userFailed());
     }
 }
 
@@ -68,7 +86,7 @@ export const getBuidings = async () => {
     }
 }
 
-export const checkoutRequest = async (checkoutData, user, dispatch) => {
+export const checkoutRequest = async (checkoutData, user) => {
     try {
         const res = await axios.post("http://nguyenxuanthuan-001-site1.htempurl.com/api/checkouts", checkoutData, {
             headers: {
@@ -76,10 +94,6 @@ export const checkoutRequest = async (checkoutData, user, dispatch) => {
                 'Content-Type': 'application/json'
             },
         });
-        const resData = res.then((data) => {
-            console.log(data);
-        });
-        return resData;
     } catch (error) {
         return error;
     }

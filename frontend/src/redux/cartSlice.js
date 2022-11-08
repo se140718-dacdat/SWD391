@@ -14,7 +14,7 @@ const cartSlice = createSlice({
             state.cart.isFetching = true;
         },
         cartSuccess: (state, action) => {
-            state.cart.isFetching = false;
+            state.cart.isFetching = true;
             state.cart.currentCart.push(action.payload);
             state.cart.error = false;
         },
@@ -26,25 +26,25 @@ const cartSlice = createSlice({
             state.cart.isFetching = true;
         },
         quantitySuccess: (state, action) => {
-            state.cart.isFetching = false;
+            state.cart.isFetching = true;
             state.cart.currentCart = (action.payload);
             state.cart.error = false;
         },
         quantityFailed: (state) => {
-            state.login.isFetching = false;
-            state.login.error = true;
+            state.cart.isFetching = false;
+            state.cart.error = true;
         },
         clearStart: (state) => {
             state.cart.isFetching = true;
         },
         clearSuccess: (state) => {
-            state.cart.isFetching = false;
+            state.cart.isFetching = true;
             state.cart.currentCart = [];
             state.cart.error = false;
         },
         clearFailed: (state) => {
-            state.login.isFetching = false;
-            state.login.error = true;
+            state.cart.isFetching = false;
+            state.cart.error = true;
         }
     }
 });
