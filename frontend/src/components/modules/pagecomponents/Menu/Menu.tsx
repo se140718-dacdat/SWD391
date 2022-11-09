@@ -31,7 +31,7 @@ const Menu: React.FC = props => {
                         categories?.map((item, index) => {
                             return (
                                 <li key={index} className="menu-item clear-fix">
-                                    <a href={`/${item.id}`} className="menu-item-link">
+                                    <a href={`/&CateId=${item.id}`} className="menu-item-link">
                                         <img className= "menu-item-icon" src={item.icon}></img>
                                         <span className="menu-item-name">{item.name}</span>
                                     </a>

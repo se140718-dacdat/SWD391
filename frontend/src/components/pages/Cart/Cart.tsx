@@ -25,7 +25,8 @@ const Cart = () => {
                     transactionType: transactionType,
                     cartList: getProducts(cart)
                 };
-                checkoutRequest(checkout, user);
+                console.log(checkout);
+                // (checkoutRequest(checkout, user));
                 setMessage("Checkout successfully!");
                 setMessageStatus("green");
                 clearCart(dispatch);

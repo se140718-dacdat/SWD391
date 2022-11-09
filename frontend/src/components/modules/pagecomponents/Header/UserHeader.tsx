@@ -26,7 +26,7 @@ const UserHeader: React.FC = props => {
         } else {
             isShowCart("display-none");
         }
-    }, []);
+    }, [cart]);
 
 
     const renderNotification = (name: string) => {
@@ -119,10 +119,7 @@ const UserHeader: React.FC = props => {
                             <Nav.Link className='link' href="/">Home</Nav.Link>
                             <Nav.Link className='link' href="/create-post">Post</Nav.Link>
                             <Nav.Link className='link' href="/store">Store</Nav.Link>
-                        </Nav>
-                        <Nav className="search">
-                            <i className="pi pi-search"></i>
-                            <input type="search" className="search-bar" placeholder='Search...' />
+                            <Nav.Link className='link' href="/order">Order</Nav.Link>
                         </Nav>
                         {
                             notifications.map((item, index) => {

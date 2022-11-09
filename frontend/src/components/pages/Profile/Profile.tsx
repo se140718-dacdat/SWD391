@@ -1,10 +1,11 @@
-import { FormEvent, useEffect, useState } from "react";
+import { FC, FormEvent, useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { Building, editProfile } from "../../../model";
+import { Building, editProfile, PostShow } from "../../../model";
 import { getUser } from "../../../redux/apiRequest";
 import MessageBox from "../../modules/pagecomponents/popups/MessageBox/MessageBox";
 import './Profile.css';
+
 
 const Profile = () => {
     const jwtToken = useSelector((state: any) => state.auth.login.currentUser.data.jwtToken);
@@ -22,16 +23,35 @@ const Profile = () => {
     const dispatch = useDispatch();
     const [message, setMessage] = useState('');
     const [messageStatus, setMessageStatus] = useState('');
+    const [sell, setSell] = useState();
+    const [allPosts, setAllPosts] = useState<PostShow[]>([]);
+
 
     useEffect(() => {
         fetchData();
-    }, [edit, building]);
+    }, [edit, building, sell]);
 
     async function fetchData() {
         try {
             const res = await fetch("http://nguyenxuanthuan-001-site1.htempurl.com/api/buildings");
             const data = await res.json();
             setBuildings(data.data);
+            const resSell = await fetch(`http://nguyenxuanthuan-001-site1.htempurl.com/api/orders/users?id=${user.id}`, {
+                headers: {
+                    Authorization: `Bearer ${jwtToken}`,
+                    'Content-Type': 'application/json'
+                },
+            });
+            const dataSell = await resSell.json();
+            setSell(dataSell.data.length);
+            const response = await fetch(`http://nguyenxuanthuan-001-site1.htempurl.com/api/posts/accounts?id=${user?.id}`, {
+                headers: {
+                    Authorization: `Bearer ${jwtToken}`,
+                    'Content-Type': 'application/json'
+                },
+            });
+            const dataPost = await response.json();
+            setAllPosts(dataPost.data);
             const resBuilding = await fetch(`http://nguyenxuanthuan-001-site1.htempurl.com/api/buildings/${user.buildingId}`);
             const dataBuilding = await resBuilding.json();
             setBuilding(dataBuilding.data);
@@ -88,11 +108,11 @@ const Profile = () => {
                     <img className="user-avt" src={user?.avatarUrl} alt="" />
                     <div className="user-react">
                         <div className="">
-                            <span className="number">22</span>
+                            <span className="number">{allPosts?.length}</span>
                             <span className="react-number">Posts</span>
                         </div>
                         <div className="">
-                            <span className="number">22</span>
+                            <span className="number">{sell}</span>
                             <span className="react-number">Sell</span>
                         </div>
                         <div className="">

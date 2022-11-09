@@ -16,6 +16,7 @@ import ProductPage from './components/pages/Product/ProductPage';
 import Store from './components/pages/Product/Store';
 import Profile from './components/pages/Profile/Profile';
 import { getUser } from './redux/apiRequest';
+import Order from './components/pages/Order/Order';
 
 function App() {
   const dispatch = useDispatch();
@@ -56,7 +57,8 @@ function App() {
               <Routes>
                 <Route path='/login' element={<Login />}></Route>
                 <Route path='/' element={<Main />}></Route>
-                <Route path='/:id' element={<Filter />}></Route>
+                <Route path='/order' element={<Order />}></Route>
+                <Route path='/:id' element={<Main />}></Route>
                 <Route path='/product' element={<ProductPage />}></Route>
                 <Route path='/cart' element={<Cart />}></Route>
                 <Route path='/profile' element={<Profile />}></Route>

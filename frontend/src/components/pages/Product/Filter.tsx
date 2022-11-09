@@ -1,12 +1,13 @@
 import { Form, Pagination } from "react-bootstrap";
 import { useEffect, useState } from 'react'
-import { useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import "./Main.css";
 import { Category, PostShow } from "../../../model";
 import { getPost } from "../../../redux/apiRequest";
 import { currencyMaskString } from "../../../mask";
 import _ from 'lodash';
+import Page from "../../modules/pagecomponents/Page/Page";
 
 const Filter = () => {
     const params = useParams();
@@ -16,6 +17,9 @@ const Filter = () => {
     const [filter, setFilter] = useState<string>();
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const [keyword, setKeyword] = useState('');
+    const [sortBy, setSortBy] = useState('');
+    const [order, setOrder] = useState('');
     const [category, setCategory] = useState<Category>({
         id: "",
         name: "All Categories",
@@ -37,25 +41,7 @@ const Filter = () => {
         setCategory(dataCategory.data);
     }
 
-    const Paging = (lenght: number) => {
-        let items: any = [];
-        for (let number = 1; number <= lenght % 5; number++) {
-            items.push(
-                <Pagination.Item onClick={() => { setPage(number) }} key={number} active={number === page}>
-                    {number}
-                </Pagination.Item>
-            );
-        }
-        return (
-            <div className="page">
-                <Pagination>{items}</Pagination>
-                <br />
-            </div>
-        )
-    }
-
     const handleFilter = (posts: PostShow[]) => {
-        console.log(posts);
         switch (filter) {
             case "1":
                 setPosts(_.orderBy(posts, ['price'], ['asc', 'desc']));
@@ -75,12 +61,16 @@ const Filter = () => {
     return (
         <div id="Main" className="right-side">
             <div className="nav-title">
-                <h3>{category?.name}</h3>
-                <Form.Select aria-label="Default select example" className="filter" onChange={(e)=>{setFilter(e.target.value)}}>
+                <div className="search">
+                    <i className="pi pi-search"></i>
+                    <input type="search" className="search-bar" placeholder='Search...' onChange={(e) => { setKeyword(`Keyword=${e.target.value}&`) }} />
+                </div>
+                <Form.Select aria-label="Default select example" className="filter" onChange={(e) => { setFilter(e.target.value) }}>
                     <option>Default</option>
                     <option value="1">Lowest</option>
                     <option value="2">Highest</option>
                 </Form.Select>
+                <h3>{category?.name}</h3>
             </div>
             <ul className="products">
                 {
@@ -101,7 +91,7 @@ const Filter = () => {
                     })
                 }
             </ul>
-            {Paging(Math.ceil(allPosts.length / 5))}
+            <Page length={Math.ceil(allPosts.length / 5)} setPage={setPage} page={page}></Page>
         </div>
     );
 }
