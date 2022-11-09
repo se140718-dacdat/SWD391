@@ -8,6 +8,7 @@ import { currencyMaskString } from "../../../mask";
 import { getPost } from "../../../redux/apiRequest";
 import { useDispatch, useSelector } from "react-redux";
 import _ from "lodash";
+import MessageBox from "../../modules/pagecomponents/popups/MessageBox/MessageBox";
 
 
 const Store = () => {
@@ -18,9 +19,12 @@ const Store = () => {
     const [page, setPage] = useState<number>(1);
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const [message, setMessage] = useState('');
+    const [messageStatus, setMessageStatus] = useState('');
+    
     useEffect(() => {
         fetchData();
-    }, [page, filter]);
+    }, [page, filter, message]);
     const redirectProduct = (post: PostShow) => {
         getPost(post, dispatch, navigate);
     }
@@ -68,8 +72,11 @@ const Store = () => {
                     'Content-Type': 'application/json'
                 },
             });
+            setMessage("Removed!");
+            setMessageStatus("green");
         } catch (error) {
-            console.log(error);
+            setMessage("Remove fail!");
+            setMessageStatus("red");
         }
     }
 
@@ -91,6 +98,12 @@ const Store = () => {
     }
     return (
         <div id="Main" className="right-side">
+             {
+                message != '' ?
+                    <MessageBox status={messageStatus} message={message} setMessage={setMessage} title='inasd'></MessageBox>
+                    :
+                    null
+            }
             <div className="nav-title">
                 <h3>Manage Posts</h3>
                 <Form.Select aria-label="Default select example" className="filter" onChange={(e)=> {setFilter(e.target.value)}}>

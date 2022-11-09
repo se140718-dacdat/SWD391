@@ -1,0 +1,70 @@
+#Order .item {
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    list-style: none;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+
+#Order .item-cover {
+    float: right;
+    width: 75%;
+    padding: 10px;
+}
+
+#Order .item-cover * {
+    display: block;
+}
+
+#Order .space {
+    height: 130px;
+    color: var(--primary-color);
+}
+
+#Order .item-cover .item-store {
+    margin-top: 80px;
+}
+
+#Order .item-img {
+    float: left;
+    width: 256px;
+    height: 256px;
+}
+
+#Order .item-img > img {
+    width: 100%;
+    height: 100%;
+    border-radius: 20px 0 0 20px;
+}
+
+#Order .item-price {
+    font-weight: bold;
+    padding: 24px 0;
+}
+
+#Order .item-title,
+#Order .item-name {
+    text-transform: capitalize;
+}
+
+#Order .item-name {
+    font-size: 1.2rem;
+    color: var(--black-color);
+    font-weight: bold;
+}
+
+#Order .item-total {
+    text-align: right;
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+#Order .item-bottom {
+    padding-top: 24px;
+    padding-right: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

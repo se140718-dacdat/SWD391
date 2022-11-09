@@ -15,7 +15,6 @@ const Main = () => {
     const [posts, setPosts] = useState<PostShow[]>([]);
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const [filter, setFilter] = useState<string>();
     const [length, setLength] = useState(1);
     const [keyword, setKeyword] = useState('');
     const [sortBy, setSortBy] = useState('');
@@ -31,7 +30,7 @@ const Main = () => {
 
     useEffect(() => {
         fetchData();
-    }, [ page, filter, keyword, params.id, categoryId]);
+    }, [ page, sortBy, order, keyword, params.id, categoryId]);
 
     const redirectProduct = (post: PostShow) => {
         getPost(post, dispatch, navigate);
@@ -43,28 +42,15 @@ const Main = () => {
         } else {
             setCategoryId('');
         }
-        const response = await fetch(`http://nguyenxuanthuan-001-site1.htempurl.com/search?${keyword}page=${page}&pageSize=5${categoryId}`);
+        const response = await fetch(`http://nguyenxuanthuan-001-site1.htempurl.com/search?${keyword}page=${page}&pageSize=5${order}${sortBy}${categoryId}`);
         const data = await response.json();
-        handleFilter(data.data.post);
+        setPosts(data.data.post);
         const getLength = categoryId.replace('&', "?");
         const res = await fetch(`http://nguyenxuanthuan-001-site1.htempurl.com/search${getLength}`);
         const resData = await res.json();
         setLength(resData.data.total);
     }
 
-    const handleFilter = (posts: PostShow[]) => {
-        switch (filter) {
-            case "1":
-                setPosts(_.orderBy(posts, ['price'], ['asc', 'desc']));
-                break;
-            case "2":
-                setPosts(_.orderBy(posts, ['price'], ['desc', 'asc']));
-                break;
-            default:
-                setPosts(posts);
-                break;
-        }
-    }
 
     return (
         <div id="Main" className="right-side">
@@ -73,10 +59,15 @@ const Main = () => {
                     <i className="pi pi-search"></i>
                     <input type="search" className="search-bar" placeholder='Search...' onChange={(e) => { setKeyword(`Keyword=${e.target.value}&`) }} />
                 </div>
-                <Form.Select aria-label="Default select example" className="filter" onChange={(e) => { setFilter(e.target.value) }}>
-                    <option>Default</option>
-                    <option value="1">Lowest first</option>
-                    <option value="2">Highest first</option>
+                <Form.Select aria-label="Default select example" className="filter" onChange={(e) => { setOrder(e.target.value) }}>
+                    <option value="">Order by</option>
+                    <option value="&Order=price_asc">Lowest Price</option>
+                    <option value="&Order=price_desc">Highest Price</option>
+                </Form.Select>
+                <Form.Select aria-label="Default select example" className="filter" onChange={(e) => { setSortBy(e.target.value) }}>
+                    <option value="">Sort by</option>
+                    <option value="&SortBy=newdate">Lastest</option>
+                    <option value="&SortBy=olddate">Oldest</option>
                 </Form.Select>
             </div>
             <h3>{category.name}</h3>

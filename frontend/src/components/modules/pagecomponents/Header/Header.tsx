@@ -20,10 +20,6 @@ const Header: React.FC = props => {
                         <Nav className="me-auto">
                             <Nav.Link href="/">Home</Nav.Link>
                         </Nav>
-                        <Nav className="search">
-                            <i className="pi pi-search"></i>
-                            <input type="search" className="search-bar" placeholder='Search...' />
-                        </Nav>
                         <Nav>
                             <Nav.Link href="/login"><Button className="btn-primary-color" variant="primary">Login</Button></Nav.Link>
                         </Nav>

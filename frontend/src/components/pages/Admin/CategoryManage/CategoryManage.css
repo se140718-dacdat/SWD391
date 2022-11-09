@@ -1,0 +1,58 @@
+#CategoryManage {
+    padding: 150px;
+}
+
+#CategoryManage h1 {
+    margin-bottom: 24px;
+}
+
+#CategoryManage .user-wrap {
+    padding: 24px;
+}
+
+#CategoryManage .item {
+    list-style: none;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin-bottom: 24px;
+    padding: 24px 24px 8px 24px;
+}
+
+#CategoryManage .item-cover {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+#CategoryManage .item-name {
+    font-weight: bold;
+    font-size: 1rem;
+    align-self: center;
+}
+
+#CategoryManage .item-room {
+    width: 20%;
+    align-self: center;
+}
+
+#CategoryManage .item-edit {
+    align-self: flex-end;
+    width: 60%;
+}
+
+#CategoryManage .item-edit span {
+    margin-right: 28px;
+    font-weight: 700;
+}
+
+#CategoryManage .input {
+    border-radius: 5px;
+    padding: 4px 8px;
+}
+
+#CategoryManage .btn-edit,
+#CategoryManage .btn-status {
+    padding-left: 28px;
+    padding-right: 28px;
+    border-radius: 5px;
+}

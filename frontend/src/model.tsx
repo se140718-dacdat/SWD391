@@ -16,6 +16,20 @@ export interface Post {
     categoryId: string,
 }
 
+export interface PostOrder {
+    id: string;
+    accountId: string;
+    building: Building;
+    buildingId: string;
+    createAt: string;
+    description: string;
+    imageUrl: string;
+    lastUpdateAt: string;
+    price: number;
+    product: Product;
+    title: string;
+}
+
 export interface Category {
     id: string;
     name: string;
@@ -25,10 +39,9 @@ export interface Category {
 export interface Product {
     id: string,
     name: string,
-    price: Number,
+    price: number,
     description: string,
     quantity: number,
-    dimensions: string,
     categoryId: string,
 }
 
@@ -114,4 +127,30 @@ export interface User {
     role: string;
     status: boolean;
     jwtToken: string;
+}
+
+export interface Transaction {
+    id: string;
+    description: string;
+    transactionTime: string;
+    transactionType: string;
+}
+
+export interface OrderDetail {
+    id: string;
+    post: PostOrder;
+    quantity: number;
+    total: number;
+    transaction: Transaction
+}
+
+export interface User {
+    id: string;
+    userName: string;
+    fullName: string;
+    description: string;
+    phone: string;
+    gender: string;
+    avatarUrl: string;
+    buildingId: string;
 }

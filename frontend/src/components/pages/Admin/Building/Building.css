@@ -1,0 +1,57 @@
+#Building {
+    padding: 150px;
+}
+
+#Building h1 {
+    margin-bottom: 24px;
+}
+
+#Building .user-wrap {
+    padding: 24px;
+}
+
+#Building .item {
+    list-style: none;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin-bottom: 24px;
+    padding: 24px 24px 8px 24px;
+}
+
+#Building .item-cover {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+#Building .item-name {
+    color: var(--primary-color);
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+#Building .item-room {
+    width: 20%;
+    align-self: center;
+}
+
+#Building .item-edit {
+    align-self: flex-end;
+}
+
+#Building .item-edit span {
+    margin-right: 28px;
+    font-weight: 700;
+}
+
+#Building .input {
+    border-radius: 5px;
+    padding: 4px 8px;
+}
+
+#Building .btn-edit,
+#Building .btn-status {
+    padding-left: 28px;
+    padding-right: 28px;
+    border-radius: 5px;
+}
