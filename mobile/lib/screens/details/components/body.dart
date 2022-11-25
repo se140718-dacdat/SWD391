@@ -17,6 +17,13 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
+  bool isMine = false;
+  @override
+  void initState() {
+    isMine = widget.post.accountId == accountController.myAccount.value.id;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -66,30 +73,56 @@ class _BodyState extends State<Body> {
                                   width: 50,
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
-                                    image: DecorationImage(
-                                        image: accountController
-                                                    .getAccount.value.avatarUrl
-                                                    .toString() !=
-                                                "null"
-                                            ? NetworkImage(accountController
-                                                .getAccount.value.avatarUrl
-                                                .toString())
-                                            : const AssetImage(
-                                                "assets/images/profile.png",
-                                              ) as ImageProvider),
+                                    image: isMine
+                                        ? DecorationImage(
+                                            image: accountController.myAccount
+                                                        .value.avatarUrl
+                                                        .toString() !=
+                                                    "null"
+                                                ? NetworkImage(accountController
+                                                    .myAccount.value.avatarUrl
+                                                    .toString())
+                                                : const AssetImage(
+                                                    "assets/images/profile.png",
+                                                  ) as ImageProvider)
+                                        : DecorationImage(
+                                            image: accountController.accountPost
+                                                        .value.avatarUrl
+                                                        .toString() !=
+                                                    "null"
+                                                ? NetworkImage(accountController
+                                                    .accountPost.value.avatarUrl
+                                                    .toString())
+                                                : const AssetImage(
+                                                    "assets/images/profile.png",
+                                                  ) as ImageProvider),
                                   ),
                                 ),
                               ),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
-                                  Text(
-                                    accountController.getAccount.value.fullName
-                                        .toString(),
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                    ),
-                                  ),
+                                  Obx(() {
+                                    if (isMine) {
+                                      return Text(
+                                        accountController
+                                            .myAccount.value.fullName
+                                            .toString(),
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                        ),
+                                      );
+                                    } else {
+                                      return Text(
+                                        accountController
+                                            .accountPost.value.fullName
+                                            .toString(),
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                        ),
+                                      );
+                                    }
+                                  }),
                                   Padding(
                                     padding: EdgeInsets.only(top: 5),
                                     child: Text(
@@ -118,15 +151,26 @@ class _BodyState extends State<Body> {
                               Padding(
                                 padding: EdgeInsets.symmetric(
                                     vertical: kDefaultPaddin / 2),
-                                child: Text(
-                                  accountController.getAccount.value.phone
-                                      .toString(),
-                                  style: TextStyle(
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.bold,
-                                      letterSpacing: 0.5,
-                                      color: Colors.redAccent),
-                                ),
+                                child: isMine
+                                    ? Text(
+                                        accountController.myAccount.value.phone
+                                            .toString(),
+                                        style: TextStyle(
+                                            fontSize: 22,
+                                            fontWeight: FontWeight.bold,
+                                            letterSpacing: 0.5,
+                                            color: Colors.redAccent),
+                                      )
+                                    : Text(
+                                        accountController
+                                            .accountPost.value.phone
+                                            .toString(),
+                                        style: TextStyle(
+                                            fontSize: 22,
+                                            fontWeight: FontWeight.bold,
+                                            letterSpacing: 0.5,
+                                            color: Colors.redAccent),
+                                      ),
                               ),
                             ],
                           ),

@@ -34,7 +34,7 @@ class RegisterController extends GetxController {
           registerToJson(registerModel), "accounts", "");
       var data = json.decode(response);
       if (data['message'] == 'Success') {
-        Get.to(() => const LoginPage());
+        Get.off(() => const LoginPage());
       }
     } catch (e) {
       e.printError();

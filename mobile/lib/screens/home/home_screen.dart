@@ -30,9 +30,9 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
   @override
   void initState() {
-    postController.listPosts;
-    categoryController.loadData();
     super.initState();
+    categoryController.fetchCategory();
+    postController.fetchPostData();
   }
 
   @override

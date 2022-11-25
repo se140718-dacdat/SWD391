@@ -5,6 +5,7 @@ import 'package:mobile/constants.dart';
 import 'package:mobile/constrain/controller.dart';
 import 'package:mobile/screens/home/home_screen.dart';
 import 'package:mobile/screens/login/login_screen.dart';
+import 'package:mobile/screens/post/post_list_by_account.dart';
 import 'package:mobile/screens/user/footer_content.dart';
 import 'package:mobile/screens/user/profile_item/profile_item.dart';
 import 'package:mobile/screens/user/sp_solid_btn/sp_solid_btn.dart';
@@ -121,6 +122,19 @@ class _ProfileWithoutLoginState extends State<ProfileWithoutLogin> {
               color: kWhiteColor,
               child: Column(
                 children: [
+                  ProfileItem(
+                    title: "My Post",
+                    assetName: "picture.png",
+                    subTitle: "Check your post",
+                    isLast: false,
+                    onTap: () {
+                      if (loginController.isLogin.value == false) {
+                        Get.to(LoginPage());
+                      } else {
+                        Get.to(const PostByAccount());
+                      }
+                    },
+                  ),
                   ProfileItem(
                     title: 'Orders',
                     assetName: 'orders.png',

@@ -30,10 +30,15 @@ class ItemCard extends StatelessWidget {
                 color: Colors.green[100],
                 borderRadius: BorderRadius.circular(16),
               ),
-              child: Image.network(
-                post.imageUrl.toString(),
-                // cacheHeight: 140,
-              ),
+              child: post.imageUrl!.isEmpty
+                  ? Image.asset("assets/images/error.png")
+                  : Image.network(
+                      post.imageUrl.toString(),
+                      errorBuilder: (context, error, stackTrace) {
+                        return Image.asset("assets/images/error.png");
+                      },
+                      // cacheHeight: 140,
+                    ),
             ),
           ),
           Row(

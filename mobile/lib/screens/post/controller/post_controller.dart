@@ -6,8 +6,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:mobile/constrain/controller.dart';
 import 'package:mobile/models/Post.dart';
+import 'package:mobile/models/model_get/GetAccount.dart';
 import 'package:mobile/models/model_post/PostCreateModel.dart';
 import 'package:mobile/models/ProductPost.dart';
+import 'package:mobile/screens/home/components/body.dart';
 import 'package:mobile/service/network_handler/network_handler.dart';
 
 class PostController extends GetxController {
@@ -17,13 +19,18 @@ class PostController extends GetxController {
   TextEditingController price = TextEditingController();
   TextEditingController postDescription = TextEditingController();
   TextEditingController title = TextEditingController();
+  TextEditingController imageUrl = TextEditingController();
 
   RxString accountId = "".obs;
   RxString categoryId = "".obs;
   RxString buildingId = "".obs;
-  RxString imageUrl = "".obs;
+  // RxString imageUrl = "".obs;
   int quantity = 1;
   var listPosts = <Post>[].obs;
+  var listAllPosts = <Post>[].obs;
+  var isLoading = false.obs;
+  var cateId = "".obs;
+  late GetAccount postAccount;
 
   @override
   onInit() {
@@ -46,7 +53,7 @@ class PostController extends GetxController {
         PostCreateModel post = PostCreateModel(
           accountId: accountId.value,
           buildingId: buildingId.value,
-          imageUrl: imageUrl.value.toString(),
+          imageUrl: imageUrl.text,
           price: int.parse(price.text.toString()),
           title: title.text.toString(),
           categoryId: categoryId.value,
@@ -67,11 +74,11 @@ class PostController extends GetxController {
         } else {
           var data = json.decode(response);
         }
-        // if (data['message'] == 'Success') {
-        //   print("Create Succesfull!");
-        // } else {
-        //   print("Create Fail!");
-        // }
+        if (data['message'] == 'Success') {
+          print("Create Succesfull!");
+        } else {
+          print("Create Fail!");
+        }
       }
     } catch (e) {
       print("Error at PostController createPost: $e");
@@ -83,9 +90,15 @@ class PostController extends GetxController {
       var response = await NetworkHandler.get("posts", "");
       var data = jsonDecode(response);
       if (data['statusCode'] == 200) {
-        listPosts.value =
-            List.from(data['data']).map((e) => Post.fromJson(e)).toList();
+        listPosts.value = List.from(data["data"]["post"])
+            .map((e) => Post.fromJson(e))
+            .toList();
+        listAllPosts.value = List.from(data["data"]["post"])
+            .map((e) => Post.fromJson(e))
+            .toList();
+        isLoading.value = true;
       } else {
+        isLoading.value = false;
         Get.snackbar(
             "Error Loading data!", "Server responsed: ${data['statusCode']}");
       }
@@ -105,5 +118,60 @@ class PostController extends GetxController {
     } catch (e) {
       print("Error at PostController getPostByCateID $e");
     }
+  }
+
+  Future<List<Post>> fetchPostData() async {
+    try {
+      final response =
+          await await NetworkHandler.get("posts?page=1&pageSize=100", "");
+      var data = json.decode(response);
+      debugPrint(data['data']['post'].toString());
+      if (data["statusCode"] == 200) {
+        List<Post> list = [];
+        for (var x in data["data"]['post']) {
+          list.add(Post.fromJson(x));
+        }
+
+        return list;
+      }
+    } catch (e) {
+      print("Error at PostController fetchPostData() + $e");
+    }
+    return [];
+  }
+
+  Future<List<Post>> fetchPostByCategoryId(String id) async {
+    try {
+      var response = await NetworkHandler.get("posts/catecories?id=${id}", "");
+      var data = json.decode(response);
+      if (data['statusCode'] == 200) {
+        List<Post> list = [];
+        for (var x in data['data']) {
+          list.add(Post.fromJson(x));
+        }
+        return list;
+      }
+    } catch (e) {
+      print("Error at PostController fetchPostByCategoryId $e");
+    }
+    return [];
+  }
+
+  Future<List<Post>> fetchPostByAccId(String id, String token) async {
+    try {
+      var response = await NetworkHandler.get("posts/accounts?id=${id}", token);
+      var data = json.decode(response);
+      debugPrint("dataACCID: ${data}");
+      if (data['statusCode'] == 200) {
+        List<Post> list = [];
+        for (var x in data['data']) {
+          list.add(Post.fromJson(x));
+        }
+        return list;
+      }
+    } catch (e) {
+      print("Error at PostController fetchPostByAccId $e");
+    }
+    return [];
   }
 }

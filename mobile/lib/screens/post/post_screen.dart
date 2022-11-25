@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mobile/constants.dart';
 import 'package:mobile/constrain/controller.dart';
+import 'package:mobile/screens/home/home_screen.dart';
 import 'package:mobile/screens/login/login_screen.dart';
 
 class PostScreen extends StatefulWidget {
@@ -134,7 +135,13 @@ class _PostScreenState extends State<PostScreen> {
                           const SizedBox(
                             height: 15.0,
                           ),
-                          imagePicked(),
+                          // imagePicked(),
+                          _buildTFCustom(
+                              "Input url Image",
+                              "Get URL Image",
+                              postController.imageUrl,
+                              Icons.image_outlined,
+                              TextInputType.text),
                           const SizedBox(
                             height: 15.0,
                           ),
@@ -149,6 +156,7 @@ class _PostScreenState extends State<PostScreen> {
                                 postController.accountId.value =
                                     loginController.user.value.id.toString();
                                 postController.createPost();
+                                Get.to(() => const HomeScreen());
                               },
                               child: Text("Post"),
                             ),
@@ -373,57 +381,57 @@ class _PostScreenState extends State<PostScreen> {
     );
   }
 
-  Widget imagePicked() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Container(
-          child: TextButton.icon(
-            onPressed: () {
-              _pickImage(ImageSource.camera);
-            },
-            label: Text(
-              "Choose Image",
-              style: TextStyle(
-                fontSize: 18,
-              ),
-            ),
-            icon: Icon(
-              Icons.camera_alt_outlined,
-            ),
-          ),
-        ),
-        const SizedBox(
-          height: 10.0,
-        ),
-        Center(
-          child: _image == null
-              ? Text("No image selected!")
-              : Image(
-                  image: FileImage(_image!),
-                  // height: MediaQuery.of(context).size.height * 0.5,
-                  width: MediaQuery.of(context).size.width * 0.5,
-                )
-          // CircleAvatar(
-          //     backgroundImage: FileImage(_image!),
-          //   )
-          ,
-        )
-      ],
-    );
-  }
+  // Widget imagePicked() {
+  //   return Column(
+  //     crossAxisAlignment: CrossAxisAlignment.start,
+  //     children: <Widget>[
+  //       Container(
+  //         child: TextButton.icon(
+  //           onPressed: () {
+  //             _pickImage(ImageSource.camera);
+  //           },
+  //           label: Text(
+  //             "Choose Image",
+  //             style: TextStyle(
+  //               fontSize: 18,
+  //             ),
+  //           ),
+  //           icon: Icon(
+  //             Icons.camera_alt_outlined,
+  //           ),
+  //         ),
+  //       ),
+  //       const SizedBox(
+  //         height: 10.0,
+  //       ),
+  //       Center(
+  //         child: _image == null
+  //             ? Text("No image selected!")
+  //             : Image(
+  //                 image: FileImage(_image!),
+  //                 // height: MediaQuery.of(context).size.height * 0.5,
+  //                 width: MediaQuery.of(context).size.width * 0.5,
+  //               )
+  //         // CircleAvatar(
+  //         //     backgroundImage: FileImage(_image!),
+  //         //   )
+  //         ,
+  //       )
+  //     ],
+  //   );
+  // }
 
-  Future _pickImage(ImageSource source) async {
-    try {
-      final image = await ImagePicker().pickImage(source: source);
-      if (image == null) return null;
-      File? img = File(image.path);
-      setState(() {
-        _image = img;
-      });
-      postController.imageUrl.value = _image!.path.toString();
-    } on PlatformException catch (e) {
-      print(e);
-    }
-  }
+  // Future _pickImage(ImageSource source) async {
+  //   try {
+  //     final image = await ImagePicker().pickImage(source: source);
+  //     if (image == null) return null;
+  //     File? img = File(image.path);
+  //     setState(() {
+  //       _image = img;
+  //     });
+  //     postController.imageUrl.value = _image!.path.toString();
+  //   } on PlatformException catch (e) {
+  //     print(e);
+  //   }
+  // }
 }

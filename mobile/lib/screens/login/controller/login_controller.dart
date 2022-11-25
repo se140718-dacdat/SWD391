@@ -3,8 +3,10 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:mobile/constrain/controller.dart';
 import 'package:mobile/models/Account.dart';
 import 'package:mobile/models/Login.dart';
+import 'package:mobile/models/model_get/GetAccount.dart';
 import 'package:mobile/screens/home/components/body.dart';
 import 'package:mobile/screens/home/home_screen.dart';
 import 'package:mobile/screens/login/login_screen.dart';
@@ -42,10 +44,11 @@ class LoginController extends GetxController {
       user.value = Account.fromMap(data["data"]);
       jwtToken.value = user.value.jwtToken.toString();
       debugPrint(jwtToken.value);
+      accountController.checkMyUser(user.value.id.toString(), jwtToken.value);
       debugPrint("id: ${user.value.id}");
       msg.value = "";
       isLogin.value = true;
-      Get.to(() => const HomeScreen());
+      Get.off(() => const HomeScreen());
     }
   }
 

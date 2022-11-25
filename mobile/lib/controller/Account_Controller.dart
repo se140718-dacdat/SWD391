@@ -13,9 +13,10 @@ import 'package:http/http.dart' as http;
 
 class AccountController extends GetxController {
   static AccountController instance = Get.find();
-  Rx<GetAccount> getAccount = GetAccount().obs;
+  Rx<GetAccount> myAccount = GetAccount().obs;
+  Rx<GetAccount> accountPost = GetAccount().obs;
 
-  checkUserExist(String id, String token) async {
+  Future<void> checkMyUser(String id, String token) async {
     try {
       var response = await NetworkHandler.get(
         'accounts/$id',
@@ -24,13 +25,32 @@ class AccountController extends GetxController {
       if (!response.isEmpty) {
         var data = json.decode(response);
         if (data['statusCode'] == 200) {
-          getAccount.value = GetAccount.fromJson(data['data']);
+          myAccount.value = GetAccount.fromJson(data['data']);
         }
       }
-      return null;
+      return;
     } catch (e) {
       debugPrint("Error at account Controller checkUserExist $e");
     }
-    return null;
+    return;
+  }
+
+  Future<void> checkUserExist(String id, String token) async {
+    try {
+      var response = await NetworkHandler.get(
+        'accounts/$id',
+        token,
+      );
+      if (!response.isEmpty) {
+        var data = json.decode(response);
+        if (data['statusCode'] == 200) {
+          accountPost.value = GetAccount.fromJson(data['data']);
+        }
+      }
+      return;
+    } catch (e) {
+      debugPrint("Error at account Controller checkUserExist $e");
+    }
+    return;
   }
 }

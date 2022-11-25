@@ -22,12 +22,17 @@ class ProductTitleWithImage extends StatelessWidget {
           Row(
             children: <Widget>[
               Expanded(
-                child: Image.network(
-                  post.imageUrl.toString(),
-                  fit: BoxFit.fitHeight,
-                  width: size.width / 5,
-                  height: size.height / 2.9,
-                ),
+                child: post.imageUrl!.isEmpty
+                    ? Image.asset("assets/images/error.png")
+                    : Image.network(
+                        post.imageUrl.toString(),
+                        fit: BoxFit.fitHeight,
+                        width: size.width / 5,
+                        height: size.height / 2.9,
+                        errorBuilder: (context, error, stackTrace) {
+                          return Image.asset("assets/images/error.png");
+                        },
+                      ),
               ),
             ],
           )

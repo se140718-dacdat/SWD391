@@ -22,9 +22,9 @@ class ProductPriceName extends StatelessWidget {
         ),
         Container(
           child: AutoSizeText(
+            textAlign: TextAlign.start,
             post.product!.name.toString(),
             maxLines: 2,
-            textAlign: TextAlign.center,
             style: Theme.of(context)
                 .textTheme
                 .headline4

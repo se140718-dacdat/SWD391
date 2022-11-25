@@ -68,11 +68,21 @@ class CartList extends StatelessWidget {
                                           top: 5,
                                           bottom: 5,
                                         ),
-                                        child: Image.network(
-                                          currentItem.post.imageUrl.toString(),
-                                          width: 100,
-                                          height: 100,
-                                        ),
+                                        child:
+                                            currentItem.post.imageUrl!.isEmpty
+                                                ? Image.asset(
+                                                    "assets/images/error.png",
+                                                    fit: BoxFit.fitHeight,
+                                                    width: 100,
+                                                    height: 100,
+                                                  )
+                                                : Image.network(
+                                                    currentItem.post.imageUrl
+                                                        .toString(),
+                                                    fit: BoxFit.fitHeight,
+                                                    width: 100,
+                                                    height: 100,
+                                                  ),
                                       ),
                                     ),
                                     Expanded(
@@ -148,10 +158,9 @@ class CartList extends StatelessWidget {
                           children: [
                             Obx(
                               () => AutoSizeText(
-                                "Total amount: \$ ${cartController.totalAmount}",
+                                "Total amount: ${NumberFormat('###,###,###').format(cartController.totalAmount.value)} VND",
                                 style: TextStyle(
                                   color: Colors.red[400],
-                                  fontSize: 30,
                                   fontWeight: FontWeight.bold,
                                 ),
                                 maxLines: 1,

@@ -68,6 +68,7 @@ class _AddToCartPageState extends State<AddToCartPage> {
               height: 50,
               child: ElevatedButton(
                 onPressed: () {
+                  cartController.addItemInCart(widget.post);
                   Get.to(() => CartList());
                 },
                 style: ButtonStyle(

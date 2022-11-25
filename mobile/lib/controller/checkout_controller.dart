@@ -26,9 +26,9 @@ class CheckOutController extends GetxController {
       }
       debugPrint(json.encode(cartList.toJson()));
       PostCheckOut cout = PostCheckOut(
-        accountId: accountController.getAccount.value.id,
+        accountId: accountController.myAccount.value.id,
         transactionType: "COD",
-        walletId: accountController.getAccount.value.wallet!.id,
+        walletId: accountController.myAccount.value.wallet!.id,
         description: description.text.toString(),
         cartList: cartList.toJson(),
       );
@@ -42,6 +42,8 @@ class CheckOutController extends GetxController {
         print("Success");
         isCheckOut.value = true;
         Get.to(() => const HomeScreen());
+      } else {
+        print("Fail");
       }
     } catch (e) {}
   }

@@ -7,7 +7,7 @@ import 'package:mobile/screens/details/components/cart/cart_model/cart_list_mode
 class CartController extends GetxController {
   var numOfItems = 1.obs;
   var totalQty = 0.obs;
-  dynamic totalAmount = 0.obs;
+  var totalAmount = 0.obs;
   var cartItems = <CartItemListModel>[].obs;
 
   static CartController instance = Get.find();
